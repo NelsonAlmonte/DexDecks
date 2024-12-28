@@ -1,0 +1,19 @@
+.card-container {
+  perspective: 1000px;
+  width: 300px;
+  margin: auto;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  z-index: 0;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.card:hover {
+  transform: scale(1.5);
+}

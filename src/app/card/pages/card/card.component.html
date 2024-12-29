@@ -1,2 +1,115 @@
-<p>card works!</p>
-<a [routerLink]="['']">Go back</a>
+<div class="max-w-screen-xl container mx-auto mt-4">
+  <div class="flex justify-start">
+    <div class="w-1/4">
+      <img
+        class="rounded-lg shadow-md"
+        [src]="this.cardService.card()?.images?.large"
+        alt="Pokemon image"
+      />
+    </div>
+    <div class="flex-1 ms-10">
+      <h1 class="text-5xl text-gray-900 mb-2">
+        {{ this.cardService.card()?.name }}
+      </h1>
+      <span class="text-lg text-gray-600"
+        >{{ this.cardService.card()?.supertype }} |
+        {{ (this.cardService.card()?.subtypes)![0] }} | Evolves from
+        {{ this.cardService.card()?.evolvesFrom }}</span
+      >
+      <div class="grid grid-cols-4 gap-4 my-8">
+        <app-card-detail-item
+          [type]="'Card type'"
+          [value]="this.cardService.card()?.supertype"
+          [color]="'sky'"
+          [icon]="'bootstrapTag'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Stage'"
+          [value]="(this.cardService.card()?.subtypes)![0]"
+          [color]="'sky'"
+          [icon]="'bootstrapLayersHalf'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Evolves from'"
+          [value]="this.cardService.card()?.evolvesFrom"
+          [color]="'sky'"
+          [icon]="'bootstrapArrowUpRightSquare'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Type'"
+          [value]="(this.cardService.card()?.types)![0]"
+          [color]="'sky'"
+          [element]="(this.cardService.card()?.types)![0] | lowercase"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Hit points'"
+          [value]="this.cardService.card()?.hp"
+          [color]="'sky'"
+          [icon]="'bootstrapHeart'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Weakness'"
+          [value]="
+            (this.cardService.card()?.weaknesses)![0].type +
+            ' ' +
+            (this.cardService.card()?.weaknesses)![0].value
+          "
+          [color]="'sky'"
+          [element]="(this.cardService.card()?.weaknesses)![0].type | lowercase"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Resistances'"
+          [value]="
+            (this.cardService.card()?.resistances)![0].type +
+            ' ' +
+            (this.cardService.card()?.resistances)![0].value
+          "
+          [color]="'sky'"
+          [element]="
+            (this.cardService.card()?.resistances)![0].type | lowercase
+          "
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Retreat'"
+          [value]="
+            (this.cardService.card()?.retreatCost)![0] +
+            ' ×' +
+            this.cardService.card()?.retreatCost?.length
+          "
+          [color]="'sky'"
+          [element]="(this.cardService.card()?.retreatCost)![0] | lowercase"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Expansion'"
+          [value]="this.cardService.card()?.set?.name"
+          [color]="'sky'"
+          [icon]="'bootstrapBoxSeam'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Card number'"
+          [value]="
+            this.cardService.card()?.number +
+            '/' +
+            this.cardService.card()?.set?.printedTotal
+          "
+          [color]="'sky'"
+          [icon]="'bootstrapListOl'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Rarity'"
+          [value]="this.cardService.card()?.rarity"
+          [color]="'sky'"
+          [icon]="'bootstrapStars'"
+        ></app-card-detail-item>
+        <app-card-detail-item
+          [type]="'Artist'"
+          [value]="this.cardService.card()?.artist"
+          [color]="'sky'"
+          [icon]="'bootstrapPalette'"
+        ></app-card-detail-item>
+      </div>
+    </div>
+  </div>
+
+  <a [routerLink]="['']">Go back</a>
+</div>

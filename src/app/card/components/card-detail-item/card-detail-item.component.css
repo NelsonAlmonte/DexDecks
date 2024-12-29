@@ -1,0 +1,59 @@
+.energy-icon {
+  list-style: none;
+  aspect-ratio: 1;
+  background-size: 120% 120%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-image: none;
+  background-image: var(--bg-image, none);
+  border-radius: 50%;
+}
+
+.energy-icon.sm {
+  height: 20px;
+  width: 20px;
+}
+
+.energy-icon-type-grass {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_GRASS-2pqSx-BF.png);
+}
+
+.energy-icon-type-fire {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_FIRE-bMZcCB15.png);
+}
+
+.energy-icon-type-water {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_WATER-CTn2xtu2.png);
+}
+
+.energy-icon-type-lightning {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_ELECTRIC-BN08L5LY.png);
+}
+
+.energy-icon-type-psychic {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_PSYCHIC-y-oPBbQT.png);
+}
+
+.energy-icon-type-fighting {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_FIGHT-BDvJ-dyy.png);
+}
+
+.energy-icon-type-darkness {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_DARK-aWEmDl5d.png);
+}
+
+.energy-icon-type-metal {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_STEEL-CMvSMlcL.png);
+}
+
+.energy-icon-type-fairy {
+  --bg-image: url(https://images.pokemoncard.io/images/assets/types/Fairy.webp);
+}
+
+.energy-icon-type-colorless {
+  --bg-image: url(https://codexcdn.com/pocket/frontend/assets/BattleEne_NORMAL-DnMMl1_5.png);
+}
+
+.energy-icon-type-dragon {
+  --bg-image: url(https://images.pokemoncard.io/images/assets/types/Dragon.webp);
+}

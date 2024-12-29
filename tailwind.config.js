@@ -6,4 +6,12 @@ module.exports = {
   },
   plugins: [require("flowbite/plugin")],
   darkMode: "class",
+  safelist: [
+    {
+      pattern: /bg-sky-(100|200|700)/,
+    },
+    {
+      pattern: /text-sky-(100|200|700)/,
+    },
+  ],
 };

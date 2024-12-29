@@ -13,6 +13,7 @@ export interface Card {
   abilities?: Ability[];
   attacks?: Attack[];
   weaknesses?: Weakness[];
+  resistances?: Resistances[];
   retreatCost?: string[];
   convertedRetreatCost?: number;
   set: SetInfo;
@@ -42,6 +43,11 @@ export interface Attack {
 }
 
 export interface Weakness {
+  type: string;
+  value: string;
+}
+
+export interface Resistances {
   type: string;
   value: string;
 }

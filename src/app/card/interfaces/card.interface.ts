@@ -10,8 +10,10 @@ export interface Card {
   hp: string;
   types: string[];
   evolvesFrom?: string;
+  evolvesTo?: string;
   abilities?: Ability[];
   attacks?: Attack[];
+  rules?: string[];
   weaknesses?: Weakness[];
   resistances?: Resistances[];
   retreatCost?: string[];

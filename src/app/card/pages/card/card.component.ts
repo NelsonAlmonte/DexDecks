@@ -1,46 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CardDetailItemComponent } from '@card/components/card-detail-item/card-detail-item.component';
 import { CardService } from '@card/services/card.service';
-import { provideIcons } from '@ng-icons/core';
-import {
-  bootstrapPalette,
-  bootstrapStars,
-  bootstrapHeart,
-  bootstrapArrowUpRightSquare,
-  bootstrapLayersHalf,
-  bootstrapTag,
-  bootstrapBoxSeam,
-  bootstrapListOl,
-} from '@ng-icons/bootstrap-icons';
-import { LowerCasePipe } from '@angular/common';
+import { CardDetailComponent } from '@card/components/card-detail/card-detail.component';
+import { CardHeaderComponent } from '@card/components/card-header/card-header.component';
+import { CardSkeletonComponent } from '@card/skeleton-loaders/card-skeleton/card-skeleton.component';
+import { CardCombatDetailComponent } from '@card/components/card-combat-detail/card-combat-detail.component';
 
 @Component({
   selector: 'app-card',
-  imports: [RouterLink, CardDetailItemComponent, LowerCasePipe],
+  imports: [
+    RouterLink,
+    CardDetailComponent,
+    CardHeaderComponent,
+    CardSkeletonComponent,
+    CardCombatDetailComponent,
+  ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
-  providers: [
-    provideIcons({
-      bootstrapPalette,
-      bootstrapStars,
-      bootstrapHeart,
-      bootstrapArrowUpRightSquare,
-      bootstrapLayersHalf,
-      bootstrapTag,
-      bootstrapBoxSeam,
-      bootstrapListOl,
-    }),
-  ],
 })
 export class CardComponent implements OnInit {
+  route = inject(ActivatedRoute);
   cardService = inject(CardService);
-
-  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.cardService.fetchCard(id!);
   }
 }

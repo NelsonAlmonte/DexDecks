@@ -11,7 +11,7 @@ import { NgIcon } from '@ng-icons/core';
 export class CardDetailItemComponent {
   type = input<string>('');
   value = input<string | number | undefined>();
-  icon = input<string>('');
   color = input<string>('');
-  element = input<string>('');
+  icon = input<string | undefined>();
+  element = input<string | undefined>();
 }

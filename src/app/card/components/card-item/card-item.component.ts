@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card } from '@card/interfaces/card.interfae';
+import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 
 @Component({

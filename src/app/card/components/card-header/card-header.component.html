@@ -1,0 +1,16 @@
+<h1 class="text-4xl text-gray-900 mb-2">
+  {{ card()?.name }}
+</h1>
+<div class="flex text-gray-600">
+  <span>{{ card()?.supertype }}</span>
+  <span class="mx-2">•</span>
+  <span>{{ (card()?.subtypes)![0] }}</span>
+  @if (card()?.evolvesFrom) {
+  <span class="mx-2">•</span>
+  <span>Evolves from {{ card()?.evolvesFrom }}</span>
+  } @if (card()?.evolvesTo) {
+
+  <span class="mx-2">•</span>
+  <span>Evolves to {{ card()?.evolvesTo }}</span>
+  }
+</div>

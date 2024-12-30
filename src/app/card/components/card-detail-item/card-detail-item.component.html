@@ -1,8 +1,8 @@
 <div
-  class="flex items-center px-5 py-3 bg-{{ color() }}-100 rounded-2xl shadow-md"
+  class="flex items-center px-5 py-3 bg-{{ color() }}-100 rounded-2xl shadow-sm"
 >
   <div class="p-4 bg-{{ color() }}-200 rounded-xl">
-    @if (!element()) {
+    @if (icon()) {
     <ng-icon class="text-{{ color() }}-700" [name]="icon()" size="20"></ng-icon>
     } @else {
     <div class="energy-icon sm energy-icon-type-{{ element() }}"></div>

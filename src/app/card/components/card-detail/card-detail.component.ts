@@ -1,4 +1,4 @@
-import { Component, effect, input, OnInit } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Card } from '@card/interfaces/card.interface';
 import { CardDetailItemComponent } from '../card-detail-item/card-detail-item.component';
 import { provideIcons } from '@ng-icons/core';
@@ -33,23 +33,10 @@ import { generateCardDetails } from '@card/factories/card-detail.factory';
     }),
   ],
 })
-export class CardDetailComponent implements OnInit {
+export class CardDetailComponent {
   card = input<Card | null>();
-  details: CardDetailItem[] = [];
-
-  constructor() {
-    this.buildCardDetailItems();
-  }
-
-  ngOnInit(): void {}
-
-  buildCardDetailItems(): void {
-    effect(() => {
-      if (!this.card()) {
-        this.details = [];
-        return;
-      }
-      this.details = generateCardDetails(this.card()!);
-    });
-  }
+  details = computed<CardDetailItem[]>(() => {
+    if (!this.card()) return [];
+    return generateCardDetails(this.card()!);
+  });
 }

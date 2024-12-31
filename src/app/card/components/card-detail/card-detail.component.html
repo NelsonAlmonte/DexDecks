@@ -1,9 +1,3 @@
-@for (detail of details; track $index) { @if (detail.value) {
-<app-card-detail-item
-  [type]="detail.type"
-  [value]="detail.value"
-  [color]="detail.color"
-  [icon]="detail.icon"
-  [element]="detail.element"
-></app-card-detail-item>
+@for (detail of details(); track $index) { @if (detail.value) {
+<app-card-detail-item [detail]="detail"></app-card-detail-item>
 } }

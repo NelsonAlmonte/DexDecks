@@ -4,7 +4,7 @@ import { CardService } from '@card/services/card.service';
 import { CardDetailComponent } from '@card/components/card-detail/card-detail.component';
 import { CardHeaderComponent } from '@card/components/card-header/card-header.component';
 import { CardSkeletonComponent } from '@card/skeleton-loaders/card-skeleton/card-skeleton.component';
-import { CardCombatDetailComponent } from '@card/components/card-combat-detail/card-combat-detail.component';
+import { CombatDetailComponent } from '@card/components/combat-detail/combat-detail.component';
 
 @Component({
   selector: 'app-card',
@@ -13,7 +13,7 @@ import { CardCombatDetailComponent } from '@card/components/card-combat-detail/c
     CardDetailComponent,
     CardHeaderComponent,
     CardSkeletonComponent,
-    CardCombatDetailComponent,
+    CombatDetailComponent,
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',

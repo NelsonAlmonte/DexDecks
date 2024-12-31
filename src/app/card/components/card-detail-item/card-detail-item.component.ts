@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { CardDetailItem } from '@card/interfaces/card-detail-item.interface';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
@@ -9,9 +10,5 @@ import { NgIcon } from '@ng-icons/core';
   styleUrl: './card-detail-item.component.css',
 })
 export class CardDetailItemComponent {
-  type = input<string>('');
-  value = input<string | number | undefined>();
-  color = input<string>('');
-  icon = input<string | undefined>();
-  element = input<string | undefined>();
+  detail = input<CardDetailItem>();
 }

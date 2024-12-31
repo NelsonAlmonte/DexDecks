@@ -1,0 +1,8 @@
+<div class="mb-6" id="combat-details" data-accordion="open" #combatDetails>
+  @for (detail of details(); track $index) { @if (detail.value) {
+  <app-combat-detail-item
+    [detail]="detail"
+    #combatDetailItem
+  ></app-combat-detail-item>
+  } }
+</div>

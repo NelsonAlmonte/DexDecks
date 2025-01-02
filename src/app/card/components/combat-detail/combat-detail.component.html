@@ -1,8 +1,10 @@
 <div class="mb-6" id="combat-details" data-accordion="open" #combatDetails>
-  @for (detail of details(); track $index) { @if (detail.value) {
+  @for (detail of details(); track $index; let isFirst = $first, isLast = $last)
+  {
   <app-combat-detail-item
     [detail]="detail"
+    [rowInfo]="{ first: isFirst, last: isLast }"
     #combatDetailItem
   ></app-combat-detail-item>
-  } }
+  }
 </div>

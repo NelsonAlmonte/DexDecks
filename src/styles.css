@@ -6,3 +6,47 @@
 ng-icon {
   display: block !important;
 }
+
+.energy-icon-type-grass {
+  --bg-image: url(../public/assets/img/energy-types/Grass.webp);
+}
+
+.energy-icon-type-fire {
+  --bg-image: url(../public/assets/img/energy-types/Fire.webp);
+}
+
+.energy-icon-type-water {
+  --bg-image: url(../public/assets/img/energy-types/Water.webp);
+}
+
+.energy-icon-type-lightning {
+  --bg-image: url(../public/assets/img/energy-types/Lightning.webp);
+}
+
+.energy-icon-type-psychic {
+  --bg-image: url(../public/assets/img/energy-types/Psychic.webp);
+}
+
+.energy-icon-type-fighting {
+  --bg-image: url(../public/assets/img/energy-types/Fighting.webp);
+}
+
+.energy-icon-type-darkness {
+  --bg-image: url(../public/assets/img/energy-types/Darkness.webp);
+}
+
+.energy-icon-type-metal {
+  --bg-image: url(../public/assets/img/energy-types/Metal.webp);
+}
+
+.energy-icon-type-fairy {
+  --bg-image: url(../public/assets/img/energy-types/Fairy.webp);
+}
+
+.energy-icon-type-colorless {
+  --bg-image: url(../public/assets/img/energy-types/Colorless.webp);
+}
+
+.energy-icon-type-dragon {
+  --bg-image: url(../public/assets/img/energy-types/Dragon.webp);
+}

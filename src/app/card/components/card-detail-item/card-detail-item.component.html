@@ -11,7 +11,7 @@
       size="20"
     ></ng-icon>
     } @else {
-    <div class="energy-icon sm energy-icon-type-{{ detail()?.element }}"></div>
+    <app-energy-type [type]="detail()?.element"></app-energy-type>
     }
   </div>
   <div class="ms-3">

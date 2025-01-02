@@ -18,22 +18,36 @@ import type {
 import { CombatDetailItemComponent } from '@card/components/combat-detail-item/combat-detail-item.component';
 import { CombatDetail } from '@card/interfaces/combat-detail.interface';
 import { generateCombatDetails } from '@card/factories/combat-detail.factory';
+import { provideIcons } from '@ng-icons/core';
+import {
+  bootstrapLightning,
+  bootstrapFire,
+  bootstrapBook,
+} from '@ng-icons/bootstrap-icons';
 
 @Component({
   selector: 'app-combat-detail',
   imports: [CombatDetailItemComponent],
   templateUrl: './combat-detail.component.html',
   styleUrl: './combat-detail.component.css',
+  providers: [
+    provideIcons({
+      bootstrapLightning,
+      bootstrapFire,
+      bootstrapBook,
+    }),
+  ],
 })
 export class CombatDetailComponent implements AfterViewInit {
   card = input<Card | null>();
   details = computed<CombatDetail[]>(() => {
     if (!this.card()) return [];
-    return generateCombatDetails(this.card()!);
+    return generateCombatDetails(this.card()!).filter(
+      (e) => e.value !== undefined
+    );
   });
   @ViewChild('combatDetails')
   combatDetails!: ElementRef<HTMLElement>;
-  // TODO: Bug?
   @ViewChildren('combatDetailItem')
   combatDetailItem!: QueryList<CombatDetailItemComponent>;
 
@@ -53,11 +67,19 @@ export class CombatDetailComponent implements AfterViewInit {
         active: index === 0 ? true : false,
       });
     });
-    console.log(accordionItems);
+
     const options: AccordionOptions = {
       alwaysOpen: true,
       activeClasses: 'text-gray-900 dark:text-white',
       inactiveClasses: 'text-gray-500 dark:text-gray-400',
+      onOpen(accordion, item) {
+        item.triggerEl.children[0].classList.remove('rounded-b-2xl');
+        item.triggerEl.children[0].classList.remove('shadow-sm');
+      },
+      onClose(accordion, item) {
+        item.triggerEl.children[0].classList.add('rounded-b-2xl');
+        item.triggerEl.children[0].classList.add('shadow-sm');
+      },
     };
 
     new Accordion(accordionEl, accordionItems, options);

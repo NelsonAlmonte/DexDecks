@@ -7,7 +7,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
     {
       type: 'Type',
       value: card.types?.[0] ?? undefined,
-      color: 'sky',
+      color: 'fire',
       element: card.types?.[0]?.toLocaleLowerCase() ?? undefined,
     },
     {
@@ -15,7 +15,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.weaknesses?.[0]
         ? `${card.weaknesses[0].type} ${card.weaknesses[0].value}`
         : undefined,
-      color: 'sky',
+      color: 'fire',
       element: card.weaknesses?.[0]?.type?.toLocaleLowerCase() ?? undefined,
     },
     {
@@ -23,7 +23,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.resistances?.[0]
         ? `${card.resistances[0].type} ${card.resistances[0].value}`
         : undefined,
-      color: 'sky',
+      color: 'fire',
       element: card.resistances?.[0]?.type?.toLocaleLowerCase() ?? undefined,
     },
     {
@@ -31,31 +31,31 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.retreatCost?.[0]
         ? `${card.retreatCost[0]} × ${card.retreatCost.length}`
         : undefined,
-      color: 'sky',
+      color: 'fire',
       element: card.retreatCost?.[0]?.toLocaleLowerCase() ?? undefined,
     },
     {
       type: 'Hit points',
       value: card.hp ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapHeart',
     },
     {
       type: 'Rarity',
       value: card.rarity ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapStars',
     },
     {
       type: 'Expansion',
       value: card.set.name ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapBoxSeam',
     },
     {
       type: 'Series',
       value: card.set.series ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapTags',
     },
     {
@@ -63,25 +63,25 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.number
         ? `${card.number} / ${card.set.printedTotal}`
         : undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapListOl',
     },
     {
       type: 'Release date',
       value: card.set.releaseDate ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapCalendar3',
     },
     {
       type: 'National dex number',
       value: card.nationalPokedexNumbers?.[0] ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapJournal',
     },
     {
       type: 'Artist',
       value: card.artist ?? undefined,
-      color: 'sky',
+      color: 'fire',
       icon: 'bootstrapPalette',
     },
   ];

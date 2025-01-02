@@ -1,24 +1,17 @@
-<h2 id="combat-{{ detail()?.type }}-heading" #combatHeading>
+<h2 class="mt-4" id="combat-{{ detail()?.type }}-heading" #combatHeading>
   <button
     type="button"
-    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 rounded-t-2xl bg-sky-100 hover:bg-sky-200 gap-3"
+    class="flex items-center justify-between w-full rounded-t-2xl rounded-b-2xl shadow-sm p-5 font-medium rtl:text-right text-gray-900 bg-sky-100 hover:bg-sky-200 gap-3"
     [attr.data-accordion-target]="'#combat-' + detail()?.type + '-body'"
     aria-expanded="true"
     [attr.aria-controls]="'#combat-' + detail()?.type + '-body'"
   >
-    <span class="flex items-center capitalize"
-      ><svg
-        class="w-5 h-5 me-2 shrink-0 fill-sky-700"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
+    <span class="flex items-center capitalize">
+      <ng-icon
+        class="text-sky-700 me-3"
+        [name]="detail()?.icon"
+        size="20"
+      ></ng-icon>
       {{ detail()?.text }}</span
     >
     <svg
@@ -46,16 +39,41 @@
   #combatBody
 >
   <div
-    class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900"
+    class="p-5 border boder-gray-200 border-t-0 rounded-b-2xl shadow-sm dark:border-gray-700 dark:bg-gray-900"
   >
-    @for (item of foo(); track $index) {
-    <p>{{ item }}</p>
-    }
-    <!-- <p class="mb-2 text-gray-500 dark:text-gray-400"> -->
-    <pre>
-        {{ foo() | json }}
-      </pre
-    >
-    <!-- </p> -->
+    @for (item of detail()?.value; track $index; let isLast = $last) { @if
+    (isAbility(item)) {
+    <div>
+      <span
+        class="bg-sky-100 text-sky-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300"
+        >{{ item.type }}</span
+      >
+      <span class="font-bold text-sky-700">{{ item.name }}</span>
+      <p class="text-gray-800 mt-2">{{ item.text }}</p>
+    </div>
+    } @if (isAttack(item)) {
+    <div>
+      <div class="flex items-center">
+        <div class="flex">
+          @for (energyType of item.cost; track $index) {
+          <app-energy-type
+            class="me-1"
+            [type]="energyType.toLocaleLowerCase()"
+          ></app-energy-type>
+          }
+        </div>
+        <span class="font-bold text-sky-700 ms-2">{{ item.name }}</span>
+        <span class="font-bold text-gray-700 ms-2">{{ item.damage }}</span>
+      </div>
+      <p class="text-gray-800 mt-2">{{ item.text }}</p>
+      @if (!isLast) {
+      <hr
+        class="w-3/5 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-8 dark:bg-gray-700"
+      />
+      }
+    </div>
+    } @if (isRule(item)) {
+    <p class="text-gray-800">{{ item }}</p>
+    } }
   </div>
 </div>

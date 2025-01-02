@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   Component,
   computed,
@@ -6,22 +5,28 @@ import {
   input,
   ViewChild,
 } from '@angular/core';
-import { Ability, Attack } from '@card/interfaces/card.interface';
 import { CombatDetail } from '@card/interfaces/combat-detail.interface';
+import {
+  isAbility,
+  isAttack,
+  isRule,
+} from '@card/factories/combat-detail.factory';
+import { RowInfo } from '@shared/interfaces/array.interface';
+import { NgIcon } from '@ng-icons/core';
+import { EnergyTypeComponent } from '@shared/components/energy-type/energy-type.component';
 
 @Component({
   selector: 'app-combat-detail-item',
-  imports: [JsonPipe],
+  imports: [NgIcon, EnergyTypeComponent],
   templateUrl: './combat-detail-item.component.html',
   styleUrl: './combat-detail-item.component.css',
 })
 export class CombatDetailItemComponent {
   detail = input<CombatDetail>();
-  foo = computed(() => {
-    const detail = this.detail();
-    if (!detail?.value) return [];
-    return detail.value as any[];
-  });
+  rowInfo = input<RowInfo>();
   @ViewChild('combatHeading') combatHeading!: ElementRef<HTMLElement>;
   @ViewChild('combatBody') combatBody!: ElementRef<HTMLElement>;
+  isAbility = isAbility;
+  isAttack = isAttack;
+  isRule = isRule;
 }

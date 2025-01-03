@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CardService } from '@card/services/card.service';
 import { CardDetailComponent } from '@card/components/card-detail/card-detail.component';
@@ -18,12 +18,16 @@ import { CombatDetailComponent } from '@card/components/combat-detail/combat-det
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
   cardService = inject(CardService);
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.cardService.fetchCard(id!);
+  }
+
+  ngOnDestroy(): void {
+    this.cardService.card.set(null);
   }
 }

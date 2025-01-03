@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CardService } from '@card/services/card.service';
 import { CardItemComponent } from '@card/components/card-item/card-item.component';
 
@@ -8,20 +8,12 @@ import { CardItemComponent } from '@card/components/card-item/card-item.componen
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.css',
 })
-export class CardListComponent implements OnInit {
-  cardService: CardService = inject(CardService);
-  INITIAL_PAGE_SIZE = 10;
-
-  ngOnInit(): void {
-    this.getCards();
-  }
-
-  getCards() {
-    this.cardService.fetchCards(this.INITIAL_PAGE_SIZE);
-  }
+export class CardListComponent {
+  cardService = inject(CardService);
+  CARDS_TO_GET = 10;
 
   getMoreCards() {
-    const pageSize = this.cardService.cards().length + this.INITIAL_PAGE_SIZE;
+    const pageSize = this.cardService.cards().length + this.CARDS_TO_GET;
     this.cardService.fetchCards(pageSize);
   }
 }

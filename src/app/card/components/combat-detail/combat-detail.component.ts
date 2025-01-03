@@ -10,11 +10,7 @@ import {
 } from '@angular/core';
 import { Card } from '@card/interfaces/card.interface';
 import { Accordion } from 'flowbite';
-import type {
-  AccordionInterface,
-  AccordionItem,
-  AccordionOptions,
-} from 'flowbite';
+import type { AccordionItem, AccordionOptions } from 'flowbite';
 import { CombatDetailItemComponent } from '@card/components/combat-detail-item/combat-detail-item.component';
 import { CombatDetail } from '@card/interfaces/combat-detail.interface';
 import { generateCombatDetails } from '@card/factories/combat-detail.factory';

@@ -5,4 +5,5 @@ export interface CombatDetail {
   value: Ability[] | Attack[] | string[] | undefined;
   text: string;
   icon: string;
+  color: string;
 }

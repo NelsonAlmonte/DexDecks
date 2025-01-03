@@ -132,13 +132,8 @@ module.exports = {
   darkMode: "class",
   safelist: [
     {
-      pattern: /bg-lightning-(100|200|700)/,
-    },
-    {
-      pattern: /bg-fire-(100|200|700)/,
-    },
-    {
-      pattern: /text-lightning-(100|200|700)/,
+      pattern:
+        /(bg|text|border|ring)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700)/,
     },
   ],
 };

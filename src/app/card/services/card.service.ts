@@ -20,7 +20,7 @@ export class CardService {
         `https://api.pokemontcg.io/v2/cards?pageSize=${pageSize}`
       )
       .subscribe((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         this.cards.set(response.data);
       });
   }
@@ -29,7 +29,7 @@ export class CardService {
     return this.http
       .get<Response<Card>>(`https://api.pokemontcg.io/v2/cards/${id}`)
       .subscribe((response) => {
-        // console.log(response);
+        console.log(response);
         this.card.set(response.data);
       });
   }

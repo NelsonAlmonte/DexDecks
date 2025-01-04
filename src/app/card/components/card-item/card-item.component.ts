@@ -42,7 +42,7 @@ export class CardItemComponent implements OnInit {
     this.zIndex = 'z-0';
   }
 
-  goToCard(id: string | undefined): void {
+  goToCard(): void {
     this.router.navigate(['/card', this.card()?.id]);
   }
 }

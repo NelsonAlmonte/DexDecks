@@ -12,7 +12,7 @@ export class CardListComponent {
   cardService = inject(CardService);
   CARDS_TO_GET = 10;
 
-  getMoreCards() {
+  getMoreCards(): void {
     const pageSize = this.cardService.cards().length + this.CARDS_TO_GET;
     this.cardService.fetchCards(pageSize);
   }

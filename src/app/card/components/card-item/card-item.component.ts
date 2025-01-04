@@ -10,12 +10,11 @@ import { CardService } from '@card/services/card.service';
   styleUrl: './card-item.component.css',
 })
 export class CardItemComponent implements OnInit {
+  router = inject(Router);
   cardService = inject(CardService);
   card = input<Card>();
   transformStyle: string = '';
   zIndex: string = '';
-
-  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 

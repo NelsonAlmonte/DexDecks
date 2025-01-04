@@ -9,6 +9,7 @@ export class CardService {
   http = inject(HttpClient);
   cards = signal<Card[]>([]);
   card = signal<Card | null>(null);
+  searchResults = signal<Card[]>([]);
 
   constructor() {
     this.fetchCards(10);
@@ -31,6 +32,15 @@ export class CardService {
       .subscribe((response) => {
         console.log(response);
         this.card.set(response.data);
+      });
+  }
+
+  searchCards(params: string) {
+    return this.http
+      .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards?q=${params}`)
+      .subscribe((response) => {
+        console.log(response);
+        this.searchResults.set(response.data);
       });
   }
 }

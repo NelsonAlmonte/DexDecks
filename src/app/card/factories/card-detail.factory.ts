@@ -38,7 +38,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
     {
       type: 'Retreat',
       value: card.retreatCost?.[0]
-        ? `${card.retreatCost[0]} × ${card.retreatCost.length}`
+        ? `${card.retreatCost[0]} ×${card.retreatCost.length}`
         : undefined,
       color:
         card.supertype === 'Pokémon'

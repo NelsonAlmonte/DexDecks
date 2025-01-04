@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { CardService } from '@card/services/card.service';
+import { Component, input } from '@angular/core';
 import { CardItemComponent } from '@card/components/card-item/card-item.component';
+import { Card } from '@card/interfaces/card.interface';
 
 @Component({
   selector: 'app-card-list',
@@ -9,11 +9,5 @@ import { CardItemComponent } from '@card/components/card-item/card-item.componen
   styleUrl: './card-list.component.css',
 })
 export class CardListComponent {
-  cardService = inject(CardService);
-  CARDS_TO_GET = 10;
-
-  getMoreCards(): void {
-    const pageSize = this.cardService.cards().length + this.CARDS_TO_GET;
-    this.cardService.fetchCards(pageSize);
-  }
+  cards = input<Card[]>();
 }

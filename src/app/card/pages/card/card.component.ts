@@ -1,5 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { CardService } from '@card/services/card.service';
 import { CardDetailComponent } from '@card/components/card-detail/card-detail.component';
 import { CardHeaderComponent } from '@card/components/card-header/card-header.component';
@@ -9,7 +10,6 @@ import { CombatDetailComponent } from '@card/components/combat-detail/combat-det
 @Component({
   selector: 'app-card',
   imports: [
-    RouterLink,
     CardDetailComponent,
     CardHeaderComponent,
     CardSkeletonComponent,
@@ -20,6 +20,7 @@ import { CombatDetailComponent } from '@card/components/combat-detail/combat-det
 })
 export class CardComponent implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
+  location = inject(Location);
   cardService = inject(CardService);
 
   ngOnInit(): void {

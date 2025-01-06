@@ -37,7 +37,9 @@ export class CardService {
 
   searchCards(params: string) {
     return this.http
-      .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards?q=${params}`)
+      .get<Response<Card[]>>(
+        `https://api.pokemontcg.io/v2/cards?q=${params}&pageSize=25`
+      )
       .subscribe((response) => {
         console.log(response);
         this.searchResults.set(response.data);

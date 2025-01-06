@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
-import { SearchModalComponent } from '@shared/components/search-modal/search-modal.component';
+import { SearchModalComponent } from '@shared/components/search/search-modal/search-modal.component';
 import { initFlowbite } from 'flowbite';
 
 @Component({

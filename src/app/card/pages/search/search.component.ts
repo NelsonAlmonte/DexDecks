@@ -14,7 +14,9 @@ export class SearchComponent implements OnInit {
   cardService = inject(CardService);
 
   ngOnInit(): void {
-    const params = this.route.snapshot.paramMap.get('params');
-    this.cardService.searchCards(params!);
+    this.route.queryParams.subscribe((params) => {
+      console.log(params);
+      this.cardService.searchCards(params['q']);
+    });
   }
 }

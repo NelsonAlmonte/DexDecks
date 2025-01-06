@@ -17,7 +17,7 @@ export const routes: Routes = [
     component: CardComponent,
   },
   {
-    path: 'search/:params',
+    path: 'search',
     component: SearchComponent,
   },
 ];

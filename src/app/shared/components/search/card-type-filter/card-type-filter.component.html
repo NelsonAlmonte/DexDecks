@@ -1,0 +1,16 @@
+<li>
+  <input
+    type="checkbox"
+    id="energy-type-{{ cardTypeIndex() }}"
+    class="hidden peer"
+    [formControl]="control()"
+  />
+  <label
+    for="energy-type-{{ cardTypeIndex() }}"
+    class="inline-flex w-full p-3 text-gray-900 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer peer-checked:bg-sky-100 peer-checked:border-sky-100 hover:bg-sky-100 hover:border-sky-100"
+  >
+    <div class="flex items-center">
+      <div class="w-full font-semibold ms-3">{{ cardType()!.type }}</div>
+    </div>
+  </label>
+</li>

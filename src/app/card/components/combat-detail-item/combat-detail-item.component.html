@@ -50,7 +50,7 @@
         }}-700 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full"
         >{{ item.type }}</span
       >
-      <span class="font-bold text-{{ detail()?.color }}-700">{{
+      <span class="font-semibold text-{{ detail()?.color }}-700">{{
         item.name
       }}</span>
       <p class="text-gray-800 mt-2">{{ item.text }}</p>
@@ -66,10 +66,10 @@
           ></app-energy-type>
           }
         </div>
-        <span class="font-bold text-{{ detail()?.color }}-700 ms-2">{{
+        <span class="font-semibold text-{{ detail()?.color }}-700 ms-2">{{
           item.name
         }}</span>
-        <span class="font-bold text-gray-700 ms-2">{{ item.damage }}</span>
+        <span class="font-semibold text-gray-700 ms-2">{{ item.damage }}</span>
       </div>
       <p class="text-gray-800 mt-2">{{ item.text }}</p>
       @if (!isLast) {

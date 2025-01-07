@@ -134,6 +134,7 @@ module.exports = {
     {
       pattern:
         /(bg|text|border|ring)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700)/,
+      variants: ["peer-focus", "peer-checked", "hover"],
     },
   ],
 };

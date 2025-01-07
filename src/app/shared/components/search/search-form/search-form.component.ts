@@ -8,11 +8,17 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EnergyTypeFilterComponent } from '@shared/components/search/energy-type-filter/energy-type-filter.component';
-import { types } from '@shared/data/type.data';
+import { CardTypeFilterComponent } from '@shared/components/search/card-type-filter/card-type-filter.component';
+import { cardTypes, types } from '@shared/data/types.data';
+import { cardType } from '@shared/interfaces/search.interface';
 
 @Component({
   selector: 'app-search-form',
-  imports: [ReactiveFormsModule, EnergyTypeFilterComponent],
+  imports: [
+    ReactiveFormsModule,
+    EnergyTypeFilterComponent,
+    CardTypeFilterComponent,
+  ],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.css',
 })
@@ -21,6 +27,7 @@ export class SearchFormComponent implements OnInit {
   fb = inject(FormBuilder);
   searchForm!: FormGroup;
   types: string[] = types;
+  cardTypes: cardType[] = cardTypes;
 
   ngOnInit(): void {
     this.buildForm();
@@ -30,11 +37,16 @@ export class SearchFormComponent implements OnInit {
     this.searchForm = this.fb.group({
       name: [''],
       types: this.fb.array(types.map(() => this.fb.control(false))),
+      cardTypes: this.fb.array(cardTypes.map(() => this.fb.control(false))),
     });
   }
 
   get typesFormArray(): FormArray {
     return this.searchForm.get('types') as FormArray;
+  }
+
+  get cardTypesFormArray(): FormArray {
+    return this.searchForm.get('cardTypes') as FormArray;
   }
 
   getSelectedTypes(): string[] {

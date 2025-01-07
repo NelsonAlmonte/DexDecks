@@ -1,9 +1,10 @@
 import { Component, computed, input } from '@angular/core';
 import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { EnergyTypeComponent } from '@shared/components/energy-type/energy-type.component';
 
 @Component({
   selector: 'app-energy-type-filter',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, EnergyTypeComponent],
   templateUrl: './energy-type-filter.component.html',
   styleUrl: './energy-type-filter.component.css',
 })

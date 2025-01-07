@@ -1,4 +1,4 @@
-import { cardType } from '@shared/interfaces/search.interface';
+import { CardType } from '@shared/interfaces/search.interface';
 
 export const types: string[] = [
   'Grass',
@@ -14,19 +14,17 @@ export const types: string[] = [
   'Dragon',
 ];
 
-// export const cardTypes: string[] = ['Energy', 'Pokémon', 'Trainer'];
-
-export const cardTypes: cardType[] = [
+export const cardTypes: CardType[] = [
   {
-    type: 'Pokémon',
+    name: 'Pokémon',
     icon: 'Trainer',
   },
   {
-    type: 'Trainer',
+    name: 'Trainer',
     icon: 'Trainer',
   },
   {
-    type: 'Energy',
+    name: 'Energy',
     icon: 'Trainer',
   },
 ];

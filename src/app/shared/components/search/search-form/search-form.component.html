@@ -1,23 +1,6 @@
 <form [formGroup]="searchForm" (ngSubmit)="doSearch()">
   <div class="p-4 md:p-5 space-y-4">
-    <div>
-      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-        Card type
-      </p>
-      <ul
-        class="grid w-full gap-x-4 gap-y-2 md:grid-cols-3"
-        formArrayName="cardTypes"
-      >
-        @for (cardType of cardTypes; track $index; let i = $index) {
-        <app-card-type-filter
-          [cardType]="cardType"
-          [cardTypeIndex]="i"
-          [cardTypesFormArray]="cardTypesFormArray"
-        ></app-card-type-filter>
-        }
-      </ul>
-    </div>
-    <div>
+    <div class="mb-4">
       <label
         for="name"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -33,23 +16,14 @@
         formControlName="name"
       />
     </div>
-    <div>
-      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-        Energy type
-      </p>
-      <ul
-        class="grid w-full gap-x-4 gap-y-2 md:grid-cols-3"
-        formArrayName="types"
-      >
-        @for (type of types; track $index; let i = $index) {
-        <app-energy-type-filter
-          [type]="type"
-          [typeIndex]="i"
-          [typesFormArray]="typesFormArray"
-        ></app-energy-type-filter>
-        }
-      </ul>
-    </div>
+    <app-card-type-filter
+      [formGroup]="formGroup('cardTypes')"
+      #cardTypeFilter
+    ></app-card-type-filter>
+    <app-energy-type-filter
+      [formGroup]="formGroup('types')"
+      #energyTypeFilter
+    ></app-energy-type-filter>
   </div>
   <div
     class="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"

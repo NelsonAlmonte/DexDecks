@@ -1,8 +1,7 @@
-import { JsonPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 import { EnergyTypeFilterComponent } from '@shared/components/search/energy-type-filter/energy-type-filter.component';
 import { CardTypeFilterComponent } from '@shared/components/search/card-type-filter/card-type-filter.component';
 import { cardTypes, types } from '@shared/data/types.data';
-import { cardType } from '@shared/interfaces/search.interface';
+import { CardType } from '@shared/interfaces/search.interface';
 
 @Component({
   selector: 'app-search-form',
@@ -25,49 +24,22 @@ import { cardType } from '@shared/interfaces/search.interface';
 export class SearchFormComponent implements OnInit {
   router = inject(Router);
   fb = inject(FormBuilder);
-  searchForm!: FormGroup;
+  searchForm = new FormGroup({
+    name: new FormControl(''),
+    types: new FormGroup({}),
+    cardTypes: new FormGroup({}),
+  });
   types: string[] = types;
-  cardTypes: cardType[] = cardTypes;
+  cardTypes: CardType[] = cardTypes;
+  @ViewChild('energyTypeFilter')
+  energyTypeFilter!: EnergyTypeFilterComponent;
+  @ViewChild('cardTypeFilter')
+  cardTypeFilter!: CardTypeFilterComponent;
 
-  ngOnInit(): void {
-    this.buildForm();
-  }
+  ngOnInit(): void {}
 
-  buildForm(): void {
-    this.searchForm = this.fb.group({
-      name: [''],
-      types: this.fb.array(types.map(() => this.fb.control(false))),
-      cardTypes: this.fb.array(cardTypes.map(() => this.fb.control(false))),
-    });
-  }
-
-  get typesFormArray(): FormArray {
-    return this.searchForm.get('types') as FormArray;
-  }
-
-  get cardTypesFormArray(): FormArray {
-    return this.searchForm.get('cardTypes') as FormArray;
-  }
-
-  getSelectedTypes(): string[] {
-    return this.types.filter((_, index) => this.typesFormArray.at(index).value);
-  }
-
-  buildTypeParam(): string | undefined {
-    const selectedTypes: string[] = this.getSelectedTypes();
-    let typeQuery: string = '';
-    if (selectedTypes.length === 0) return;
-    if (selectedTypes.length === 1)
-      return `(types:${selectedTypes[0].toLocaleLowerCase()})`;
-
-    for (let index = 0; index < selectedTypes.length; index++) {
-      if (index === selectedTypes.length - 1) {
-        typeQuery += `types:${selectedTypes[index].toLocaleLowerCase()}`;
-      } else {
-        typeQuery += `types:${selectedTypes[index].toLocaleLowerCase()} OR `;
-      }
-    }
-    return `(${typeQuery})`;
+  formGroup(group: string): FormGroup {
+    return this.searchForm.get(group) as FormGroup;
   }
 
   buildNameParam(): string | undefined {
@@ -76,29 +48,17 @@ export class SearchFormComponent implements OnInit {
     return `name:${nameQuery}*`;
   }
 
-  buildSearchQuery(params: (string | undefined)[]): string | undefined {
-    let searchQuery: string = '';
-    if (params.length === 0) return;
-    if (params.length === 1) return `${params[0]}`;
-
-    for (let index = 0; index < params.length; index++) {
-      if (index === params.length - 1) {
-        searchQuery += `${params[index]}`;
-      } else {
-        searchQuery += `${params[index]} `;
-      }
-    }
-    return searchQuery;
-  }
-
   doSearch(): void {
-    const params = [this.buildNameParam(), this.buildTypeParam()];
-    const filteredParams = params.filter((value) => value != undefined);
-    if (filteredParams.length === 0) return;
+    console.log(this.energyTypeFilter.buildTypeParam());
+    console.log(this.cardTypeFilter.buildCardTypeParam());
 
-    const encondedQuery = encodeURIComponent(
-      this.buildSearchQuery(filteredParams)!
-    );
-    this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
+    // const params = [this.buildNameParam(), this.buildTypeParam()];
+    // const filteredParams = params.filter((value) => value != undefined);
+    // if (filteredParams.length === 0) return;
+
+    // const encondedQuery = encodeURIComponent(
+    //   this.buildSearchQuery(filteredParams)!
+    // );
+    // this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
   }
 }

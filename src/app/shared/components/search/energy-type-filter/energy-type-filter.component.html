@@ -1,21 +1,32 @@
-<li>
-  <input
-    type="checkbox"
-    id="energy-type-{{ typeIndex() }}"
-    class="hidden peer"
-    [formControl]="control()"
-  />
-  <label
-    for="energy-type-{{ typeIndex() }}"
-    class="inline-flex w-full p-3 text-gray-900 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer peer-checked:bg-{{
-      type()!.toLocaleLowerCase()
-    }}-100 peer-checked:border-{{ type()!.toLocaleLowerCase() }}-100 hover:bg-{{
-      type()!.toLocaleLowerCase()
-    }}-100 hover:border-{{ type()!.toLocaleLowerCase() }}-100"
-  >
-    <div class="flex items-center">
-      <app-energy-type [type]="type()!.toLocaleLowerCase()"></app-energy-type>
-      <div class="w-full font-semibold ms-3">{{ type() }}</div>
-    </div>
-  </label>
-</li>
+<div class="mb-4" [formGroup]="formGroup()">
+  <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    Energy type
+  </p>
+  <ul class="grid w-full gap-x-4 gap-y-2 md:grid-cols-3" formArrayName="types">
+    @for (type of types; track $index; let i = $index) {
+    <li>
+      <input
+        type="checkbox"
+        id="energy-type-{{ i }}"
+        class="hidden peer"
+        [formControl]="getControl(i)"
+      />
+      <label
+        for="energy-type-{{ i }}"
+        class="inline-flex w-full p-3 text-gray-900 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer peer-checked:bg-{{
+          type.toLocaleLowerCase()
+        }}-100 peer-checked:border-{{
+          type.toLocaleLowerCase()
+        }}-100 hover:bg-{{ type.toLocaleLowerCase() }}-100 hover:border-{{
+          type.toLocaleLowerCase()
+        }}-100"
+      >
+        <div class="flex items-center">
+          <app-energy-type [type]="type.toLocaleLowerCase()"></app-energy-type>
+          <div class="w-full font-semibold ms-3">{{ type }}</div>
+        </div>
+      </label>
+    </li>
+    }
+  </ul>
+</div>

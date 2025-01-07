@@ -1,4 +1,4 @@
-export interface cardType {
-  type: string;
+export interface CardType {
+  name: string;
   icon: string;
 }

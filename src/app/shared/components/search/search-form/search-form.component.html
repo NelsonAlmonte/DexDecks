@@ -1,6 +1,14 @@
 <form [formGroup]="searchForm" (ngSubmit)="doSearch()">
   <div class="p-4 md:p-5 space-y-4">
-    <div class="mb-4">
+    <div>
+      <app-type-filter
+        [options]="buildFilter('Card type', 'cardTypes', 'supertype')"
+        [formGroup]="formGroup('cardTypes')"
+        [values]="cardTypes"
+        #typeFilter
+      ></app-type-filter>
+    </div>
+    <div>
       <label
         for="name"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -16,14 +24,14 @@
         formControlName="name"
       />
     </div>
-    <app-card-type-filter
-      [formGroup]="formGroup('cardTypes')"
-      #cardTypeFilter
-    ></app-card-type-filter>
-    <app-energy-type-filter
-      [formGroup]="formGroup('types')"
-      #energyTypeFilter
-    ></app-energy-type-filter>
+    <div>
+      <app-type-filter
+        [options]="buildFilter('Energy type', 'energyTypes', 'types')"
+        [formGroup]="formGroup('energyTypes')"
+        [values]="energyTypes"
+        #typeFilter
+      ></app-type-filter>
+    </div>
   </div>
   <div
     class="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"

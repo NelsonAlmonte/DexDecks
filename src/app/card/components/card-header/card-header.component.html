@@ -3,8 +3,8 @@
 </h1>
 <div class="flex text-gray-600">
   <span>{{ card()?.supertype }}</span>
-  <span class="mx-2">•</span>
   @for (subtype of card()?.subtypes; track $index; let isLast = $last) {
+  <span class="mx-2">•</span>
   <span>{{ subtype }}</span>
   @if (!isLast) {
   <span class="mx-2">•</span>

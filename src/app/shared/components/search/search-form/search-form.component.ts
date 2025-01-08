@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,35 +12,45 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EnergyTypeFilterComponent } from '@shared/components/search/energy-type-filter/energy-type-filter.component';
-import { CardTypeFilterComponent } from '@shared/components/search/card-type-filter/card-type-filter.component';
-import { cardTypes, types } from '@shared/data/types.data';
-import { CardType } from '@shared/interfaces/search.interface';
+import { TypeFilterComponent } from '@shared/components/search/type-filter/type-filter.component';
+import {
+  Filter,
+  EnergyType,
+  CardType,
+} from '@shared/interfaces/search.interface';
+import { energyTypes, cardTypes } from '@shared/data/types.data';
+import { provideIcons } from '@ng-icons/core';
+import {
+  bootstrapCircle,
+  bootstrapLightningCharge,
+  bootstrapPersonWalking,
+} from '@ng-icons/bootstrap-icons';
 
 @Component({
   selector: 'app-search-form',
-  imports: [
-    ReactiveFormsModule,
-    EnergyTypeFilterComponent,
-    CardTypeFilterComponent,
-  ],
+  imports: [ReactiveFormsModule, TypeFilterComponent],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.css',
+  providers: [
+    provideIcons({
+      bootstrapCircle,
+      bootstrapPersonWalking,
+      bootstrapLightningCharge,
+    }),
+  ],
 })
 export class SearchFormComponent implements OnInit {
   router = inject(Router);
   fb = inject(FormBuilder);
   searchForm = new FormGroup({
     name: new FormControl(''),
-    types: new FormGroup({}),
+    energyTypes: new FormGroup({}),
     cardTypes: new FormGroup({}),
   });
-  types: string[] = types;
+  energyTypes: EnergyType[] = energyTypes;
   cardTypes: CardType[] = cardTypes;
-  @ViewChild('energyTypeFilter')
-  energyTypeFilter!: EnergyTypeFilterComponent;
-  @ViewChild('cardTypeFilter')
-  cardTypeFilter!: CardTypeFilterComponent;
+  @ViewChildren(TypeFilterComponent)
+  typeFilters!: QueryList<TypeFilterComponent>;
 
   ngOnInit(): void {}
 
@@ -48,17 +64,21 @@ export class SearchFormComponent implements OnInit {
     return `name:${nameQuery}*`;
   }
 
+  buildFilter(name: string, control: string, param: string): Filter {
+    return {
+      name: name,
+      control: control,
+      param: param,
+    };
+  }
+
   doSearch(): void {
-    console.log(this.energyTypeFilter.buildTypeParam());
-    console.log(this.cardTypeFilter.buildCardTypeParam());
-
-    // const params = [this.buildNameParam(), this.buildTypeParam()];
-    // const filteredParams = params.filter((value) => value != undefined);
-    // if (filteredParams.length === 0) return;
-
-    // const encondedQuery = encodeURIComponent(
-    //   this.buildSearchQuery(filteredParams)!
-    // );
-    // this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
+    const params = this.typeFilters
+      .map((filter) => filter.buildParam())
+      .join(' ')
+      .trim();
+    if (!params) return;
+    const encondedQuery = encodeURIComponent(params);
+    this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
   }
 }

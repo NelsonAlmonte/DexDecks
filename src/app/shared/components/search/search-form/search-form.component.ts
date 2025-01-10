@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TypeFilterComponent } from '@shared/components/search/type-filter/type-filter.component';
+import { SearchFilterComponent } from '@shared/components/search/search-filter/search-filter.component';
 import {
   Filter,
   EnergyType,
@@ -28,7 +29,7 @@ import {
 
 @Component({
   selector: 'app-search-form',
-  imports: [ReactiveFormsModule, TypeFilterComponent],
+  imports: [ReactiveFormsModule, TypeFilterComponent, SearchFilterComponent],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.css',
   providers: [
@@ -44,6 +45,7 @@ export class SearchFormComponent implements OnInit {
   fb = inject(FormBuilder);
   searchForm = new FormGroup({
     name: new FormControl(''),
+    set: new FormControl(''),
     energyTypes: new FormGroup({}),
     cardTypes: new FormGroup({}),
   });
@@ -51,34 +53,39 @@ export class SearchFormComponent implements OnInit {
   cardTypes: CardType[] = cardTypes;
   @ViewChildren(TypeFilterComponent)
   typeFilters!: QueryList<TypeFilterComponent>;
+  @ViewChildren(SearchFilterComponent)
+  searchFilters!: QueryList<SearchFilterComponent>;
 
   ngOnInit(): void {}
+
+  formControl(control: string): FormControl {
+    return this.searchForm.get(control) as FormControl;
+  }
 
   formGroup(group: string): FormGroup {
     return this.searchForm.get(group) as FormGroup;
   }
 
-  buildNameParam(): string | undefined {
-    const nameQuery = this.searchForm.value.name;
-    if (!nameQuery) return;
-    return `name:${nameQuery}*`;
-  }
-
-  buildFilter(name: string, control: string, param: string): Filter {
-    return {
-      name: name,
-      control: control,
-      param: param,
-    };
+  buildFilter(options: Filter): Filter {
+    const { name, control, param, endpoint, filter } = options;
+    return { name, control, param, endpoint, filter };
   }
 
   doSearch(): void {
-    const params = this.typeFilters
+    const typeFilters = this.typeFilters
       .map((filter) => filter.buildParam())
       .join(' ')
       .trim();
-    if (!params) return;
-    const encondedQuery = encodeURIComponent(params);
+
+    const searchFilters = this.searchFilters
+      .map((filter) => filter.buildParam())
+      .join(' ')
+      .trim();
+
+    const query = `${searchFilters} ${typeFilters}`;
+    console.log(query);
+    if (!query) return;
+    const encondedQuery = encodeURIComponent(query);
     this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
   }
 }

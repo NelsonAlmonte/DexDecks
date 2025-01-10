@@ -18,7 +18,7 @@ export interface Card {
   resistances?: Resistances[];
   retreatCost?: string[];
   convertedRetreatCost?: number;
-  set: SetInfo;
+  set: Set;
   number: string;
   artist: string;
   rarity: string;
@@ -54,7 +54,7 @@ export interface Resistances {
   value: string;
 }
 
-export interface SetInfo {
+export interface Set {
   id: string;
   name: string;
   series: string;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Card, Response } from '@card/interfaces/card.interface';
+import { Card, Response, Set } from '@card/interfaces/card.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ export class CardService {
   cards = signal<Card[]>([]);
   card = signal<Card | null>(null);
   searchResults = signal<Card[]>([]);
+  filter = signal<Card[] | Set[]>([]);
 
   constructor() {
     this.fetchCards(10);
@@ -43,6 +44,17 @@ export class CardService {
       .subscribe((response) => {
         console.log(response);
         this.searchResults.set(response.data);
+      });
+  }
+
+  search(endpoint: string, param: string) {
+    return this.http
+      .get<Response<Card[] | Set[]>>(
+        `https://api.pokemontcg.io/v2/${endpoint}?q=${param}&pageSize=5`
+      )
+      .subscribe((response) => {
+        console.log(response);
+        this.filter.set(response.data);
       });
   }
 }

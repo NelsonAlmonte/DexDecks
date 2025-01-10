@@ -27,17 +27,17 @@ export class TypeFilterComponent implements OnInit {
   values = input.required<EnergyType[] | CardType[]>();
   formArray = computed(() => {
     this.formGroup().addControl(
-      this.options().control,
+      this.options().control!,
       this.fb.array(this.values().map(() => this.fb.control(false)))
     );
-    return this.formGroup().get(this.options().control) as FormArray;
+    return this.formGroup().get(this.options().control!) as FormArray;
   });
 
   ngOnInit(): void {
     this.formArray();
   }
 
-  getControl(index: number) {
+  getControl(index: number): FormControl {
     return this.formArray().at(index) as FormControl;
   }
 

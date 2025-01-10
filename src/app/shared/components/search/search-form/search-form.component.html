@@ -2,31 +2,59 @@
   <div class="p-4 md:p-5 space-y-4">
     <div>
       <app-type-filter
-        [options]="buildFilter('Card type', 'cardTypes', 'supertype')"
+        [options]="
+          buildFilter({
+            name: 'Card type',
+            control: 'cardTypes',
+            param: 'supertype',
+            endpoint: 'cards'
+          })
+        "
         [formGroup]="formGroup('cardTypes')"
         [values]="cardTypes"
         #typeFilter
       ></app-type-filter>
     </div>
     <div>
-      <label
-        for="name"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >Card name</label
-      >
-      <input
-        type="text"
-        id="name"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Card name"
-        autocomplete="off"
-        required
+      <app-search-filter
+        [options]="
+          buildFilter({
+            name: 'Card name',
+            param: 'name',
+            endpoint: 'cards',
+            filter: 'name'
+          })
+        "
+        [formControl]="formControl('name')"
         formControlName="name"
-      />
+        #searchFilter
+      ></app-search-filter>
+    </div>
+    <div>
+      <app-search-filter
+        [options]="
+          buildFilter({
+            name: 'Set name',
+            param: 'name',
+            endpoint: 'sets',
+            filter: 'set.name'
+          })
+        "
+        [formControl]="formControl('set')"
+        formControlName="set"
+        #searchFilter
+      ></app-search-filter>
     </div>
     <div>
       <app-type-filter
-        [options]="buildFilter('Energy type', 'energyTypes', 'types')"
+        [options]="
+          buildFilter({
+            name: 'Energy type',
+            control: 'energyTypes',
+            param: 'types',
+            endpoint: 'cards'
+          })
+        "
         [formGroup]="formGroup('energyTypes')"
         [values]="energyTypes"
         #typeFilter

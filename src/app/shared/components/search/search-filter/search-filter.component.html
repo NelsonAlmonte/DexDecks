@@ -1,0 +1,50 @@
+<div>
+  <label
+    for="name"
+    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    >{{ options().name }}</label
+  >
+  <input
+    type="text"
+    id="{{ options().endpoint }}-{{ options().param }}"
+    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    placeholder="{{ options().name }}"
+    autocomplete="off"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+    #input
+  />
+  <div
+    id="dropdown"
+    class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-2 dark:bg-gray-700"
+    #dropdown
+  >
+    @if (cardService.filter().length) {
+    <ul
+      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+      aria-labelledby="dropdownDefaultButton"
+    >
+      @for (item of cardService.filter(); track $index) {
+      <li>
+        <a
+          type="button"
+          class="block px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          (click)="onSelection($event)"
+          >{{ item.name }}</a
+        >
+      </li>
+      }
+    </ul>
+    } @else {
+    <ul
+      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+      aria-labelledby="dropdownDefaultButton"
+    >
+      <li>
+        <a type="button" class="disabled block px-4 py-2">No results found</a>
+      </li>
+    </ul>
+    }
+  </div>
+</div>

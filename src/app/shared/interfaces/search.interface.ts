@@ -1,7 +1,9 @@
 export interface Filter {
   name: string;
-  control: string;
+  control?: string;
   param: string;
+  endpoint: string;
+  filter?: string;
 }
 
 export interface EnergyType {

@@ -111,6 +111,6 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   buildParam(): string | undefined {
     const searchValue = this.formControl().value;
     if (!searchValue) return;
-    return `${this.options().filter}:${searchValue}*`;
+    return `${this.options().filter}:"${searchValue}*"`;
   }
 }

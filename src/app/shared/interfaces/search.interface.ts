@@ -1,3 +1,11 @@
+import { FormControl } from '@angular/forms';
+
+export interface SearchFilter {
+  filter: Filter;
+  formControl: FormControl;
+  formControlName: string;
+}
+
 export interface Filter {
   name: string;
   control?: string;

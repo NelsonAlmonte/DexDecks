@@ -99,7 +99,6 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
       ) as string[];
 
     this.cardService.filter.set(filteredValues);
-    console.log(filteredValues);
   }
 
   onSelection(event: Event): void {

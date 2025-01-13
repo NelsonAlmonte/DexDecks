@@ -46,100 +46,11 @@
         #typeFilter
       ></app-type-filter>
     </div>
-    <div #moreFilters>
-      <h2 class="mt-4" id="more-filters-heading" #moreFiltersHeading>
-        <button
-          type="button"
-          class="flex items-center justify-between w-full rounded-t-2xl rounded-b-2xl p-5 font-medium rtl:text-right text-gray-900 bg-white border border-gray-200 hover:bg-neutral-200"
-          data-accordion-target="more-filters-body"
-          aria-expanded="true"
-          aria-controls="more-filters-body"
-        >
-          <span class="flex items-center capitalize">
-            <ng-icon
-              class="text-neutral-700 me-3"
-              name="bootstrapFunnel"
-              size="20"
-            ></ng-icon>
-            More filters</span
-          >
-          <svg
-            data-accordion-icon
-            class="w-3 h-3 rotate-180 shrink-0"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5 5 1 1 5"
-            />
-          </svg>
-        </button>
-      </h2>
-      <div
-        id="more-filters-body"
-        class="hidden"
-        aria-labelledby="accordion-open-heading-1"
-        #moreFiltersBody
-      >
-        <div class="p-5 border boder-gray-200 border-t-0 rounded-b-2xl">
-          <div class="grid grid-cols-3 gap-x-4 gap-y-2">
-            <div>
-              <app-search-filter
-                [options]="
-                  buildFilter({
-                    name: 'Set name',
-                    param: 'name',
-                    endpoint: 'sets',
-                    filter: 'set.name',
-                    isSearchable: true
-                  })
-                "
-                [formControl]="formControl('set')"
-                formControlName="set"
-                #searchFilter
-              ></app-search-filter>
-            </div>
-            <div>
-              <app-search-filter
-                [options]="
-                  buildFilter({
-                    name: 'Sub type',
-                    param: 'name',
-                    endpoint: 'subtypes',
-                    filter: 'subtypes',
-                    isSearchable: false
-                  })
-                "
-                [formControl]="formControl('subtype')"
-                formControlName="subtype"
-                #searchFilter
-              ></app-search-filter>
-            </div>
-            <div>
-              <app-search-filter
-                [options]="
-                  buildFilter({
-                    name: 'Rarity',
-                    param: 'name',
-                    endpoint: 'rarities',
-                    filter: 'rarity',
-                    isSearchable: false
-                  })
-                "
-                [formControl]="formControl('rarity')"
-                formControlName="rarity"
-                #searchFilter
-              ></app-search-filter>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <app-more-filters
+        [filters]="filters"
+        [formGroup]="formGroup('moreFilters')"
+      ></app-more-filters>
     </div>
   </div>
   <div

@@ -10,7 +10,7 @@ export class CardService {
   cards = signal<Card[]>([]);
   card = signal<Card | null>(null);
   searchResults = signal<Card[]>([]);
-  filter = signal<Card[] | Set[]>([]);
+  filter = signal<Card[] | Set[] | string[]>([]);
 
   constructor() {
     this.fetchCards(10);
@@ -47,7 +47,7 @@ export class CardService {
       });
   }
 
-  search(endpoint: string, param: string) {
+  search(endpoint: string, param?: string) {
     return this.http
       .get<Response<Card[] | Set[]>>(
         `https://api.pokemontcg.io/v2/${endpoint}?q=${param}&pageSize=5`

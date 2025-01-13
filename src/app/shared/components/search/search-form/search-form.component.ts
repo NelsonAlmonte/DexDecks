@@ -1,8 +1,10 @@
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   inject,
-  OnInit,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import {
@@ -20,16 +22,23 @@ import {
   CardType,
 } from '@shared/interfaces/search.interface';
 import { energyTypes, cardTypes } from '@shared/data/types.data';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   bootstrapCircle,
+  bootstrapFunnel,
   bootstrapLightningCharge,
   bootstrapPersonWalking,
 } from '@ng-icons/bootstrap-icons';
+import { Accordion, AccordionItem, AccordionOptions } from 'flowbite';
 
 @Component({
   selector: 'app-search-form',
-  imports: [ReactiveFormsModule, TypeFilterComponent, SearchFilterComponent],
+  imports: [
+    ReactiveFormsModule,
+    TypeFilterComponent,
+    SearchFilterComponent,
+    NgIcon,
+  ],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.css',
   providers: [
@@ -37,15 +46,18 @@ import {
       bootstrapCircle,
       bootstrapPersonWalking,
       bootstrapLightningCharge,
+      bootstrapFunnel,
     }),
   ],
 })
-export class SearchFormComponent implements OnInit {
+export class SearchFormComponent implements AfterViewInit {
   router = inject(Router);
   fb = inject(FormBuilder);
   searchForm = new FormGroup({
     name: new FormControl(''),
     set: new FormControl(''),
+    subtype: new FormControl(''),
+    rarity: new FormControl(''),
     energyTypes: new FormGroup({}),
     cardTypes: new FormGroup({}),
   });
@@ -55,8 +67,13 @@ export class SearchFormComponent implements OnInit {
   typeFilters!: QueryList<TypeFilterComponent>;
   @ViewChildren(SearchFilterComponent)
   searchFilters!: QueryList<SearchFilterComponent>;
+  @ViewChild('moreFilters') moreFilters!: ElementRef<HTMLElement>;
+  @ViewChild('moreFiltersHeading') moreFiltersHeading!: ElementRef<HTMLElement>;
+  @ViewChild('moreFiltersBody') moreFiltersBody!: ElementRef<HTMLElement>;
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.setupAccordion();
+  }
 
   formControl(control: string): FormControl {
     return this.searchForm.get(control) as FormControl;
@@ -67,8 +84,8 @@ export class SearchFormComponent implements OnInit {
   }
 
   buildFilter(options: Filter): Filter {
-    const { name, control, param, endpoint, filter } = options;
-    return { name, control, param, endpoint, filter };
+    const { name, control, param, endpoint, filter, isSearchable } = options;
+    return { name, control, param, endpoint, filter, isSearchable };
   }
 
   doSearch(): void {
@@ -87,5 +104,31 @@ export class SearchFormComponent implements OnInit {
     if (!query) return;
     const encondedQuery = encodeURIComponent(query);
     this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
+  }
+
+  setupAccordion(): void {
+    const accordionEl = this.moreFilters.nativeElement;
+    const accordionItem: AccordionItem[] = [
+      {
+        id: this.moreFiltersHeading.nativeElement.id,
+        triggerEl: this.moreFiltersHeading.nativeElement,
+        targetEl: this.moreFiltersBody.nativeElement,
+        active: false,
+      },
+    ];
+
+    const options: AccordionOptions = {
+      alwaysOpen: false,
+      activeClasses: 'bg-white',
+      onOpen(accordion, item) {
+        item.triggerEl.children[0].classList.remove('rounded-b-2xl');
+      },
+      onClose(accordion, item) {
+        item.triggerEl.children[0].classList.add('rounded-b-2xl');
+      },
+    };
+    console.log(accordionItem);
+
+    new Accordion(accordionEl, accordionItem, options);
   }
 }

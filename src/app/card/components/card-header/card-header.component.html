@@ -3,12 +3,10 @@
 </h1>
 <div class="flex text-gray-600">
   <span>{{ card()?.supertype }}</span>
-  @for (subtype of card()?.subtypes; track $index; let isLast = $last) {
+  @for (subtype of card()?.subtypes; track $index) {
   <span class="mx-2">•</span>
   <span>{{ subtype }}</span>
-  @if (!isLast) {
-  <span class="mx-2">•</span>
-  } } @if (card()?.evolvesFrom) {
+  } @if (card()?.evolvesFrom) {
   <span class="mx-2">•</span>
   <span>Evolves from {{ card()?.evolvesFrom }}</span>
   } @if (card()?.evolvesTo) {

@@ -4,6 +4,7 @@ export interface Filter {
   param: string;
   endpoint: string;
   filter?: string;
+  isSearchable?: boolean;
 }
 
 export interface EnergyType {

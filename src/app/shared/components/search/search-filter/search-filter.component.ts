@@ -14,6 +14,7 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Card, Set } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { Filter } from '@shared/interfaces/search.interface';
 import { Dropdown, DropdownInterface, DropdownOptions } from 'flowbite';
@@ -42,7 +43,7 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   @ViewChild('dropdown') dropdown!: ElementRef<HTMLDivElement>;
 
   ngOnInit(): void {
-    this.onSearch();
+    this.handleValueChanges();
   }
 
   onChange: (value: string) => void = () => {};
@@ -66,20 +67,39 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  onSearch(): void {
+  handleValueChanges(): void {
+    const isSearchable = this.options().isSearchable;
+
     this.formControl()
       .valueChanges.pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
         if (value) {
-          const param = encodeURIComponent(
-            `${this.options().param}:"${value}*"`
-          );
-          this.cardService.search(this.options().endpoint, param);
+          isSearchable ? this.doSearch(value) : this.doFilter(value);
           this.setupDropdown().show();
         } else {
           this.setupDropdown().hide();
         }
       });
+  }
+
+  doSearch(value: string): void {
+    const param = encodeURIComponent(`${this.options().param}:"${value}*"`);
+    this.cardService.search(this.options().endpoint, param);
+  }
+
+  doFilter(value: string): void {
+    if (!this.cardService.filter().length) {
+      this.cardService.search(this.options().endpoint);
+    }
+
+    const filteredValues = this.cardService
+      .filter()
+      .filter((filterValue) =>
+        (filterValue as string).toLowerCase().includes(value.toLowerCase())
+      ) as string[];
+
+    this.cardService.filter.set(filteredValues);
+    console.log(filteredValues);
   }
 
   onSelection(event: Event): void {
@@ -112,5 +132,9 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
     const searchValue = this.formControl().value;
     if (!searchValue) return;
     return `${this.options().filter}:"${searchValue}*"`;
+  }
+
+  isString(item: Card | Set | string): item is string {
+    return typeof item === 'string';
   }
 }

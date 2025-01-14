@@ -17,12 +17,13 @@ import {
 import { Card, Set } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { Filter } from '@shared/interfaces/search.interface';
+import { SearchFilterSkeletonComponent } from '@shared/skeleton-loaders/search-filter-skeleton/search-filter-skeleton.component';
 import { Dropdown, DropdownInterface, DropdownOptions } from 'flowbite';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-filter',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SearchFilterSkeletonComponent],
   templateUrl: './search-filter.component.html',
   styleUrl: './search-filter.component.css',
   providers: [
@@ -70,6 +71,7 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   handleValueChanges(): void {
     const isSearchable = this.options().isSearchable;
 
+    if (!this.options().endpoint) return;
     this.formControl()
       .valueChanges.pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
@@ -83,13 +85,15 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   }
 
   doSearch(value: string): void {
-    const param = encodeURIComponent(`${this.options().param}:"${value}*"`);
-    this.cardService.search(this.options().endpoint, param);
+    const param = encodeURIComponent(
+      `${this.options().endpointParam}:"${value}*"`
+    );
+    this.cardService.search(this.options().endpoint!, param);
   }
 
   doFilter(value: string): void {
     if (!this.cardService.filter().length) {
-      this.cardService.search(this.options().endpoint);
+      this.cardService.search(this.options().endpoint!);
     }
 
     const filteredValues = this.cardService
@@ -130,7 +134,7 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   buildParam(): string | undefined {
     const searchValue = this.formControl().value;
     if (!searchValue) return;
-    return `${this.options().filter}:"${searchValue}*"`;
+    return `${this.options().searchParam}:"${searchValue}*"`;
   }
 
   isString(item: Card | Set | string): item is string {

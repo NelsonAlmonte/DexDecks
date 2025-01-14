@@ -1,6 +1,8 @@
-<div class="grid grid-cols-4 gap-10">
+<div class="grid grid-cols-4 gap-6 mb-6">
   @for (card of cards(); track $index) {
   <app-card-item [card]="card"></app-card-item>
   }
 </div>
-<br />
+@if (cardService.isLoading()) {
+<app-cards-skeleton></app-cards-skeleton>
+}

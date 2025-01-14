@@ -4,4 +4,5 @@ export interface CardDetailItem {
   color: string;
   icon?: string;
   element?: string;
+  param?: string;
 }

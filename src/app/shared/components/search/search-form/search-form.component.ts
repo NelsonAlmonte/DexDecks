@@ -59,6 +59,7 @@ export class SearchFormComponent {
       set: new FormControl(''),
       subtype: new FormControl(''),
       rarity: new FormControl(''),
+      artist: new FormControl(''),
     }),
     energyTypes: new FormGroup({}),
     cardTypes: new FormGroup({}),
@@ -79,19 +80,36 @@ export class SearchFormComponent {
   }
 
   buildFilter(options: Filter): Filter {
-    const { name, control, param, endpoint, filter, isSearchable } = options;
-    return { name, control, param, endpoint, filter, isSearchable };
+    const {
+      labelName,
+      control,
+      endpointParam,
+      endpoint,
+      searchParam,
+      isSearchable,
+    } = options;
+    return {
+      labelName,
+      control,
+      endpointParam,
+      endpoint,
+      searchParam,
+      isSearchable,
+    };
   }
 
   doSearch(): void {
+    const nameFilter = this.searchForm.get('name')!.value
+      ? `name:${this.searchForm.get('name')!.value}* `
+      : '';
     const typeFilters = this.typeFilters
       .map((filter) => filter.buildParam())
       .join(' ')
       .trim();
 
-    const query = `${this.searchFilters.buildParam()} ${typeFilters}`;
+    const query = `${nameFilter}${this.searchFilters.buildParam()} ${typeFilters}`;
     if (!query) return;
-    const encondedQuery = encodeURIComponent(query);
-    this.router.navigate(['/search'], { queryParams: { q: encondedQuery } });
+    const encodedQuery = encodeURIComponent(query);
+    this.router.navigate(['/search'], { queryParams: { q: encodedQuery } });
   }
 }

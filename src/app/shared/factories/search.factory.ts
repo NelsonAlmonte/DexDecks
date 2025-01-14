@@ -5,10 +5,10 @@ export function generateFilters(formGroup: FormGroup): SearchFilter[] {
   return [
     {
       filter: {
-        name: 'Set name',
-        param: 'name',
+        labelName: 'Set name',
+        endpointParam: 'name',
         endpoint: 'sets',
-        filter: 'set.name',
+        searchParam: 'set.name',
         isSearchable: true,
       },
       formControl: formGroup.get('set') as FormControl,
@@ -16,10 +16,10 @@ export function generateFilters(formGroup: FormGroup): SearchFilter[] {
     },
     {
       filter: {
-        name: 'Subtype',
-        param: 'name',
+        labelName: 'Subtype',
+        endpointParam: 'name',
         endpoint: 'subtypes',
-        filter: 'subtypes',
+        searchParam: 'subtypes',
         isSearchable: false,
       },
       formControl: formGroup.get('subtype') as FormControl,
@@ -27,14 +27,23 @@ export function generateFilters(formGroup: FormGroup): SearchFilter[] {
     },
     {
       filter: {
-        name: 'Rarity',
-        param: 'name',
+        labelName: 'Rarity',
+        endpointParam: 'name',
         endpoint: 'rarities',
-        filter: 'rarity',
+        searchParam: 'rarity',
         isSearchable: false,
       },
       formControl: formGroup.get('rarity') as FormControl,
       formControlName: 'rarity',
+    },
+    {
+      filter: {
+        labelName: 'Artist',
+        searchParam: 'artist',
+        isSearchable: true,
+      },
+      formControl: formGroup.get('artist') as FormControl,
+      formControlName: 'artist',
     },
   ];
 }

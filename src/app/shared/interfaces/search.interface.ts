@@ -7,11 +7,11 @@ export interface SearchFilter {
 }
 
 export interface Filter {
-  name: string;
+  labelName: string;
   control?: string;
-  param: string;
-  endpoint: string;
-  filter?: string;
+  endpointParam?: string;
+  endpoint?: string;
+  searchParam?: string;
   isSearchable?: boolean;
 }
 

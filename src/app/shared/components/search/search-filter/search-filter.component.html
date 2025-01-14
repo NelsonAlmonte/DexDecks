@@ -1,14 +1,14 @@
 <div>
   <label
-    for="{{ options().endpoint }}-{{ options().param }}"
+    for="{{ options().endpoint }}-{{ options().searchParam }}"
     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-    >{{ options().name }}</label
+    >{{ options().labelName }}</label
   >
   <input
     type="text"
-    id="{{ options().endpoint }}-{{ options().param }}"
+    id="{{ options().endpoint }}-{{ options().searchParam }}"
     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    placeholder="{{ options().name }}"
+    placeholder="{{ options().labelName }}"
     autocomplete="off"
     [value]="value"
     (input)="onInput($event)"
@@ -20,12 +20,12 @@
     class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-2 dark:bg-gray-700"
     #dropdown
   >
-    @if (cardService.filter().length) {
+    @if (!cardService.isLoading()) { @if (cardService.filter().length) {
     <ul
-      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+      class="max-h-40 py-2 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
       aria-labelledby="dropdownDefaultButton"
     >
-      @for (item of cardService.filter().slice(0, 4); track $index) {
+      @for (item of cardService.filter(); track $index) {
       <li>
         <a
           type="button"
@@ -50,6 +50,8 @@
         <a type="button" class="disabled block px-4 py-2">No results found</a>
       </li>
     </ul>
+    } } @else {
+    <app-search-filter-skeleton></app-search-filter-skeleton>
     }
   </div>
 </div>

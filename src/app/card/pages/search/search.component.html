@@ -1,3 +1,6 @@
 <div class="max-w-screen-xl container mx-auto mt-4">
   <app-card-list [cards]="cardService.searchResults()"></app-card-list>
 </div>
+@if (!cardService.searchResults().length && !cardService.isLoading()) {
+<app-no-results></app-no-results>
+}

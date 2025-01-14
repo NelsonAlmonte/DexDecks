@@ -53,16 +53,16 @@ export class TypeFilterComponent implements OnInit {
     if (selectedFilter.length === 0) return;
     if (selectedFilter.length === 1)
       return `(${
-        this.options().param
+        this.options().searchParam
       }:${selectedFilter[0].toLocaleLowerCase()})`;
 
     for (let index = 0; index < selectedFilter.length; index++) {
       if (index === selectedFilter.length - 1) {
-        typeQuery += `${this.options().param}:${selectedFilter[
+        typeQuery += `${this.options().searchParam}:${selectedFilter[
           index
         ].toLocaleLowerCase()}`;
       } else {
-        typeQuery += `${this.options().param}:${selectedFilter[
+        typeQuery += `${this.options().searchParam}:${selectedFilter[
           index
         ].toLocaleLowerCase()} OR `;
       }

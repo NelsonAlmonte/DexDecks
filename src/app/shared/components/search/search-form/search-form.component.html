@@ -4,10 +4,9 @@
       <app-type-filter
         [options]="
           buildFilter({
-            name: 'Card type',
+            labelName: 'Card type',
             control: 'cardTypes',
-            param: 'supertype',
-            endpoint: 'cards',
+            searchParam: 'supertype',
           })
         "
         [formGroup]="formGroup('cardTypes')"
@@ -19,10 +18,10 @@
       <app-search-filter
         [options]="
           buildFilter({
-            name: 'Card name',
-            param: 'name',
+            labelName: 'Card name',
+            endpointParam: 'name',
             endpoint: 'cards',
-            filter: 'name',
+            searchParam: 'name',
             isSearchable: true
           })
         "
@@ -35,10 +34,9 @@
       <app-type-filter
         [options]="
           buildFilter({
-            name: 'Energy type',
+            labelName: 'Energy type',
             control: 'energyTypes',
-            param: 'types',
-            endpoint: 'cards',
+            searchParam: 'types',
           })
         "
         [formGroup]="formGroup('energyTypes')"

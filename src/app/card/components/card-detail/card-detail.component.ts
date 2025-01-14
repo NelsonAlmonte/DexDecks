@@ -34,9 +34,9 @@ import { generateCardDetails } from '@card/factories/card-detail.factory';
   ],
 })
 export class CardDetailComponent {
-  card = input<Card | null>();
+  card = input.required<Card | null>();
   details = computed<CardDetailItem[]>(() => {
     if (!this.card()) return [];
-    return generateCardDetails(this.card()!);
+    return generateCardDetails(this.card());
   });
 }

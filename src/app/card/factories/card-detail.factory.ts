@@ -9,9 +9,10 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.types?.[0] ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
-      element: card.types?.[0]?.toLocaleLowerCase() ?? undefined,
+      element: card.types?.[0]?.toLowerCase() ?? undefined,
+      param: `types:${card.types[0]}`,
     },
     {
       type: 'Weakness',
@@ -20,9 +21,10 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
         : undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
-      element: card.weaknesses?.[0]?.type?.toLocaleLowerCase() ?? undefined,
+      element: card.weaknesses?.[0]?.type?.toLowerCase() ?? undefined,
+      param: `weaknesses.type:${card.weaknesses?.[0].type}`,
     },
     {
       type: 'Resistances',
@@ -31,9 +33,10 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
         : undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
-      element: card.resistances?.[0]?.type?.toLocaleLowerCase() ?? undefined,
+      element: card.resistances?.[0]?.type?.toLowerCase() ?? undefined,
+      param: `resistances.type:${card.resistances?.[0].type}`,
     },
     {
       type: 'Retreat',
@@ -42,45 +45,50 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
         : undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
-      element: card.retreatCost?.[0]?.toLocaleLowerCase() ?? undefined,
+      element: card.retreatCost?.[0]?.toLowerCase() ?? undefined,
+      param: `retreatCost:${card.retreatCost?.[0]}`,
     },
     {
       type: 'Hit points',
       value: card.hp ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapHeart',
+      param: `hp:${card.hp}`,
     },
     {
       type: 'Rarity',
       value: card.rarity ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapStars',
+      param: `rarity:"${card.rarity}"`,
     },
     {
       type: 'Expansion',
       value: card.set.name ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapBoxSeam',
+      param: `set.name:"${card.set.name}"`,
     },
     {
       type: 'Series',
       value: card.set.series ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapTags',
+      param: `set.series:"${card.set.series}"`,
     },
     {
       type: 'Card number',
@@ -89,7 +97,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
         : undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapListOl',
     },
@@ -98,7 +106,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.set.releaseDate ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapCalendar3',
     },
@@ -107,18 +115,20 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       value: card.nationalPokedexNumbers?.[0] ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapJournal',
+      param: `nationalPokedexNumbers:${card.nationalPokedexNumbers?.[0]}`,
     },
     {
       type: 'Artist',
       value: card.artist ?? undefined,
       color:
         card.supertype === 'Pokémon'
-          ? card.types[0].toLocaleLowerCase()
+          ? card.types[0].toLowerCase()
           : 'colorless',
       icon: 'bootstrapPalette',
+      param: `artist:"${card.artist}"`,
     },
   ];
 }

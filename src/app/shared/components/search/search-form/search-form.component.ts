@@ -30,6 +30,8 @@ import {
   bootstrapPersonWalking,
 } from '@ng-icons/bootstrap-icons';
 import { generateFilters } from '@shared/factories/search.factory';
+import { PaginationService } from '@shared/services/pagination.service';
+import { CardService } from '@card/services/card.service';
 
 @Component({
   selector: 'app-search-form',
@@ -51,6 +53,8 @@ import { generateFilters } from '@shared/factories/search.factory';
   ],
 })
 export class SearchFormComponent {
+  cardService = inject(CardService);
+  paginationService = inject(PaginationService);
   router = inject(Router);
   fb = inject(FormBuilder);
   searchForm = new FormGroup({
@@ -109,7 +113,6 @@ export class SearchFormComponent {
 
     const query = `${nameFilter}${this.searchFilters.buildParam()} ${typeFilters}`;
     if (!query) return;
-    const encodedQuery = encodeURIComponent(query);
-    this.router.navigate(['/search'], { queryParams: { q: encodedQuery } });
+    this.router.navigate(['/search'], { queryParams: { q: query } });
   }
 }

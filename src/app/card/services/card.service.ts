@@ -12,20 +12,19 @@ export class CardService {
   searchResults = signal<Card[]>([]);
   filter = signal<Card[] | Set[] | string[]>([]);
   isLoading = signal<Boolean>(true);
+  PAGE_SIZE = 8;
 
-  constructor() {
-    this.fetchCards(8);
-  }
-
-  fetchCards(pageSize: number) {
+  fetchCards(page: number, pageSize: number = this.PAGE_SIZE) {
     this.isLoading.set(true);
     return this.http
-      .get<Response<Card[]>>(
-        `https://api.pokemontcg.io/v2/cards?pageSize=${pageSize}`
-      )
+      .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards`, {
+        params: { page: page, pageSize: pageSize },
+      })
       .subscribe((response) => {
         console.log(response.data);
-        this.cards.set(response.data);
+        this.cards.update((values) => {
+          return [...values, ...response.data];
+        });
         this.isLoading.set(false);
       });
   }
@@ -42,16 +41,25 @@ export class CardService {
       });
   }
 
-  searchCards(params: string) {
+  searchCards(params: string, page: number = 1) {
     this.isLoading.set(true);
-    this.searchResults.set([]);
     return this.http
-      .get<Response<Card[]>>(
-        `https://api.pokemontcg.io/v2/cards?q=${params}&pageSize=25`
-      )
+      .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards`, {
+        params: {
+          q: params,
+          page: page.toString(),
+          pageSize: this.PAGE_SIZE.toString(),
+        },
+      })
       .subscribe((response) => {
         console.log(response);
-        this.searchResults.set(response.data);
+        if (this.searchResults().length) {
+          this.searchResults.update((values) => {
+            return [...values, ...response.data];
+          });
+        } else {
+          this.searchResults.set(response.data);
+        }
         this.isLoading.set(false);
       });
   }

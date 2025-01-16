@@ -21,7 +21,7 @@ export class CardService {
         params: { page: page, pageSize: pageSize },
       })
       .subscribe((response) => {
-        console.log(response.data);
+        console.log(response);
         this.cards.update((values) => {
           return [...values, ...response.data];
         });

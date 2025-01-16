@@ -1,10 +1,12 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CardListComponent } from '@card/components/card-list/card-list.component';
 import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { NoResultsComponent } from '@shared/components/search/no-results/no-results.component';
+import { Pagination } from '@shared/interfaces/pagination.interface';
 import { PaginationService } from '@shared/services/pagination.service';
+import { pairwise, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -20,25 +22,32 @@ export class SearchComponent implements OnInit, OnDestroy {
   page = 1;
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      // TODO: Detectar el cambio en params para ver si reinicio la paginacion o no
-      this.resetSearch();
-      this.params = params['q'];
-      this.searchCards();
-    });
+    this.route.queryParams
+      .pipe(startWith({ q: '' } as Params), pairwise())
+      .subscribe((params) => {
+        const [oldParam, newParam] = params;
+
+        console.log('old', oldParam);
+        console.log('new', newParam);
+        this.params = newParam['q'];
+
+        const paginationState = this.paginationService.getState('search');
+        if (paginationState && !oldParam['q']) {
+          this.loadExistingSearch(paginationState);
+          return;
+        }
+
+        if (oldParam['q'] !== newParam['q']) {
+          this.resetSearch();
+          this.params = newParam['q'];
+          this.searchCards();
+        }
+      });
   }
 
   searchCards(): void {
     console.log('searchcards');
-    const paginationState = this.paginationService.getState('search');
-
-    if (paginationState) {
-      this.cardService.searchResults.set(paginationState.result as Card[]);
-      this.page = paginationState.page;
-    } else {
-      this.paginationService.resetState('search');
-      this.cardService.searchCards(this.params, this.page);
-    }
+    this.cardService.searchCards(this.params, this.page);
   }
 
   getMoreCards(): void {
@@ -49,8 +58,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   resetSearch(): void {
     this.page = 1;
     this.cardService.searchResults.set([]);
-    console.log('resetsearcjh');
     this.paginationService.resetState('search');
+  }
+
+  loadExistingSearch(paginationState: Pagination) {
+    this.cardService.searchResults.set(paginationState.result as Card[]);
+    this.page = paginationState.page;
   }
 
   ngOnDestroy(): void {

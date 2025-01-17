@@ -10,13 +10,16 @@ import { Card } from '@card/interfaces/card.interface';
 })
 export class CardHeaderComponent {
   router = inject(Router);
-  card = input.required<Card | null>();
+  card = input.required<Card>();
   class = computed(() => {
-    return `hover:text-${this.card()?.types?.[0]?.toLowerCase()}-700 hover:underline hover:decoration-${this.card()?.types?.[0]?.toLowerCase()}-700 cursor-pointer`;
+    const color = this.card().types
+      ? this.card().types[0].toLowerCase()
+      : 'colorless';
+    return `hover:text-${color}-700 hover:underline hover:decoration-${color}-700 cursor-pointer`;
   });
 
   goToSearch(param: string, value: string): void {
-    const encodedQuery = encodeURIComponent(`${param}"${value}"`);
-    this.router.navigate(['/search'], { queryParams: { q: encodedQuery } });
+    const query = `${param}"${value}"`;
+    this.router.navigate(['/search'], { queryParams: { q: query } });
   }
 }

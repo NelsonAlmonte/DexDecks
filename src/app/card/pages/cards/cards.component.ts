@@ -3,9 +3,10 @@ import { CardListComponent } from '@card/components/card-list/card-list.componen
 import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { PaginationService } from '@shared/services/pagination.service';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 @Component({
   selector: 'app-cards',
-  imports: [CardListComponent],
+  imports: [CardListComponent, InfiniteScrollDirective],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css',
 })

@@ -24,7 +24,6 @@ export class CardDetailItemComponent {
 
   goToSearch(param: string | undefined): void {
     if (!param) return;
-    const encodedQuery = encodeURIComponent(param);
-    this.router.navigate(['/search'], { queryParams: { q: encodedQuery } });
+    this.router.navigate(['/search'], { queryParams: { q: param } });
   }
 }

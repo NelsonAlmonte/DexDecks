@@ -12,7 +12,7 @@ export class CardService {
   searchResults = signal<Card[]>([]);
   filter = signal<Card[] | Set[] | string[]>([]);
   isLoading = signal<Boolean>(true);
-  PAGE_SIZE = 8;
+  PAGE_SIZE = 12;
 
   fetchCards(page: number, pageSize: number = this.PAGE_SIZE) {
     this.isLoading.set(true);

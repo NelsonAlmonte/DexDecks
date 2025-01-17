@@ -85,9 +85,7 @@ export class SearchFilterComponent implements OnInit, ControlValueAccessor {
   }
 
   doSearch(value: string): void {
-    const param = encodeURIComponent(
-      `${this.options().endpointParam}:"${value}*"`
-    );
+    const param = `${this.options().endpointParam}:"${value}*"`;
     this.cardService.search(this.options().endpoint!, param);
   }
 

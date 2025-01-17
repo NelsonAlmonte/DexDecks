@@ -1,33 +1,37 @@
-<h1 class="text-4xl text-gray-900 mb-2">
-  {{ card()?.name }}
+<h1
+  class="text-4xl text-gray-900 mb-2"
+  [class]="class()"
+  (click)="goToSearch('name:', card().name)"
+>
+  {{ card().name }}
 </h1>
 <div class="flex text-gray-600">
   <span
     [class]="class()"
-    (click)="goToSearch('supertype:', card()?.supertype!)"
-    >{{ card()?.supertype }}</span
+    (click)="goToSearch('supertype:', card().supertype)"
+    >{{ card().supertype }}</span
   >
-  @for (subtype of card()?.subtypes; track $index) {
+  @for (subtype of card().subtypes; track $index) {
   <span class="mx-2">•</span>
   <span [class]="class()" (click)="goToSearch('subtypes:', subtype)">{{
     subtype
   }}</span>
-  } @if (card()?.evolvesFrom) {
+  } @if (card().evolvesFrom) {
   <span class="mx-2">•</span>
   <span
     >Evolves from
     <span
       [class]="class()"
-      (click)="goToSearch('name:', card()?.evolvesFrom!)"
-      >{{ card()?.evolvesFrom }}</span
+      (click)="goToSearch('name:', card().evolvesFrom!)"
+      >{{ card().evolvesFrom }}</span
     ></span
   >
-  } @if (card()?.evolvesTo) {
+  } @if (card().evolvesTo) {
   <span class="mx-2">•</span>
   <span
     >Evolves to
-    <span [class]="class()" (click)="goToSearch('name:', card()?.evolvesTo!)">{{
-      card()?.evolvesTo
+    <span [class]="class()" (click)="goToSearch('name:', card().evolvesTo!)">{{
+      card().evolvesTo
     }}</span></span
   >
   }

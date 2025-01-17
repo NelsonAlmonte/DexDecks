@@ -6,11 +6,12 @@ import { CardService } from '@card/services/card.service';
 import { NoResultsComponent } from '@shared/components/search/no-results/no-results.component';
 import { Pagination } from '@shared/interfaces/pagination.interface';
 import { PaginationService } from '@shared/services/pagination.service';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { pairwise, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-search',
-  imports: [CardListComponent, NoResultsComponent],
+  imports: [CardListComponent, NoResultsComponent, InfiniteScrollDirective],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })
@@ -22,17 +23,19 @@ export class SearchComponent implements OnInit, OnDestroy {
   page = 1;
 
   ngOnInit(): void {
+    this.handleQueryParamsChanges();
+  }
+
+  handleQueryParamsChanges(): void {
     this.route.queryParams
       .pipe(startWith({ q: '' } as Params), pairwise())
       .subscribe((params) => {
         const [oldParam, newParam] = params;
 
-        console.log('old', oldParam);
-        console.log('new', newParam);
         this.params = newParam['q'];
 
         const paginationState = this.paginationService.getState('search');
-        if (paginationState && !oldParam['q']) {
+        if (paginationState && paginationState.params === this.params) {
           this.loadExistingSearch(paginationState);
           return;
         }
@@ -46,13 +49,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchCards(): void {
-    console.log('searchcards');
     this.cardService.searchCards(this.params, this.page);
   }
 
   getMoreCards(): void {
     this.page++;
-    this.cardService.searchCards(this.params, this.page);
+    this.searchCards();
   }
 
   resetSearch(): void {
@@ -69,6 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paginationService.setState('search', {
       page: this.page,
+      params: this.params,
       result: this.cardService.searchResults(),
     });
   }

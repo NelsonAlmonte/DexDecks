@@ -16,7 +16,7 @@
       />
     </div>
     <div class="flex-1 ms-10">
-      <app-card-header [card]="cardService.card()"></app-card-header>
+      <app-card-header [card]="cardService.card()!"></app-card-header>
       <app-card-detail
         class="grid grid-cols-3 gap-4 my-4"
         [card]="cardService.card()"

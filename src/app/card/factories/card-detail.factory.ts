@@ -12,7 +12,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
           ? card.types[0].toLowerCase()
           : 'colorless',
       element: card.types?.[0]?.toLowerCase() ?? undefined,
-      param: `types:${card.types[0]}`,
+      param: card.types?.[0] ? `types:${card.types[0]}` : undefined,
     },
     {
       type: 'Weakness',

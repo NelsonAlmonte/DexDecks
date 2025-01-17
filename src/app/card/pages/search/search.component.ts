@@ -49,7 +49,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchCards(): void {
-    this.cardService.searchCards(this.params, this.page);
+    this.cardService.searchCards(this.params, this.page, 'general');
   }
 
   getMoreCards(): void {
@@ -59,12 +59,16 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   resetSearch(): void {
     this.page = 1;
-    this.cardService.searchResults.set([]);
+    this.cardService.searchResults.set({ general: [] });
     this.paginationService.resetState('search');
   }
 
   loadExistingSearch(paginationState: Pagination) {
-    this.cardService.searchResults.set(paginationState.result as Card[]);
+    this.cardService.searchResults.set({
+      ...this.cardService.searchResults(),
+      general: paginationState.result as Card[],
+    });
+    this.cardService.searchResults;
     this.page = paginationState.page;
   }
 
@@ -72,7 +76,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.paginationService.setState('search', {
       page: this.page,
       params: this.params,
-      result: this.cardService.searchResults(),
+      result: this.cardService.searchResults()['general'],
     });
   }
 }

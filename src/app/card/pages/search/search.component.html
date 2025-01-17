@@ -5,9 +5,12 @@
     [infiniteScrollDistance]="2"
     (scrolled)="getMoreCards()"
   >
-    <app-card-list [cards]="cardService.searchResults()"></app-card-list>
+    <app-card-list
+      [cards]="cardService.searchResults()['general']"
+    ></app-card-list>
   </div>
 </div>
-@if (!cardService.searchResults().length && !cardService.isLoading()) {
+@if (!cardService.searchResults()['general'].length && !cardService.isLoading())
+{
 <app-no-results></app-no-results>
 }

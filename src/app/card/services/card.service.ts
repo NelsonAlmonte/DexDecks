@@ -9,7 +9,7 @@ export class CardService {
   http = inject(HttpClient);
   cards = signal<Card[]>([]);
   card = signal<Card | null>(null);
-  searchResults = signal<Card[]>([]);
+  searchResults = signal<Record<string, Card[]>>({});
   filter = signal<Card[] | Set[] | string[]>([]);
   isLoading = signal<Boolean>(true);
   PAGE_SIZE = 12;
@@ -41,7 +41,7 @@ export class CardService {
       });
   }
 
-  searchCards(params: string, page: number = 1) {
+  searchCards(params: string, page: number = 1, type: string = 'general') {
     this.isLoading.set(true);
     return this.http
       .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards`, {
@@ -53,13 +53,12 @@ export class CardService {
       })
       .subscribe((response) => {
         console.log(response);
-        if (this.searchResults().length) {
-          this.searchResults.update((values) => {
-            return [...values, ...response.data];
-          });
-        } else {
-          this.searchResults.set(response.data);
-        }
+        this.searchResults.update((results) => ({
+          ...results,
+          [type]: results[type]
+            ? [...results[type], ...response.data]
+            : response.data,
+        }));
         this.isLoading.set(false);
       });
   }

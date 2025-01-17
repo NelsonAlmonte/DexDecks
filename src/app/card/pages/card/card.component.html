@@ -23,6 +23,9 @@
       ></app-card-detail>
       <app-combat-detail [card]="cardService.card()"></app-combat-detail>
     </div>
+    <div>
+      <app-related-cards [card]="cardService.card()!"></app-related-cards>
+    </div>
   </div>
   } @else {
   <app-card-skeleton></app-card-skeleton>

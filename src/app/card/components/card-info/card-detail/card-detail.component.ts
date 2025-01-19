@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Card } from '@card/interfaces/card.interface';
-import { CardDetailItemComponent } from '../card-detail-item/card-detail-item.component';
+import { CardDetailItemComponent } from '@card/components/card-info/card-detail-item/card-detail-item.component';
 import { provideIcons } from '@ng-icons/core';
 import {
   bootstrapPalette,

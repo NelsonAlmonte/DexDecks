@@ -1,18 +1,14 @@
 <div
-  class="card-container h-auto cursor-pointer"
+  class="card-container cursor-pointer"
   (mousemove)="onMouseMove($event)"
   (mouseleave)="onMouseLeave()"
   (click)="goToCard()"
 >
-  <div
-    class="card shadow-xl"
-    [style.transform]="transformStyle"
-    [class]="zIndex"
-  >
+  <div class="card" [style.transform]="transformStyle" [class]="zIndex">
     <img
-      class="rounded-lg"
-      [src]="card()?.images?.large"
-      alt="image description"
+      class="h-auto max-w-full rounded-lg shadow-md"
+      [src]="card().images.large"
+      [alt]="card().name"
     />
   </div>
 </div>

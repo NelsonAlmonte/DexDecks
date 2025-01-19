@@ -71,7 +71,7 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       param: `rarity:"${card.rarity}"`,
     },
     {
-      type: 'Expansion',
+      type: 'Set',
       value: card.set.name ?? undefined,
       color:
         card.supertype === 'Pokémon'

@@ -25,3 +25,10 @@ export interface CardType {
   color: string;
   icon: string;
 }
+
+export interface SearchConfig {
+  type: string;
+  params: string;
+  page: number;
+  pageSize: number;
+}

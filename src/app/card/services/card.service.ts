@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Card, Response, Set } from '@card/interfaces/card.interface';
+import { SearchConfig } from '@shared/interfaces/search.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -41,22 +42,22 @@ export class CardService {
       });
   }
 
-  searchCards(params: string, page: number = 1, type: string = 'general') {
+  searchCards(config: SearchConfig) {
     this.isLoading.set(true);
     return this.http
       .get<Response<Card[]>>(`https://api.pokemontcg.io/v2/cards`, {
         params: {
-          q: params,
-          page: page.toString(),
-          pageSize: this.PAGE_SIZE.toString(),
+          q: config.params,
+          page: config.page.toString(),
+          pageSize: config.pageSize.toString(),
         },
       })
       .subscribe((response) => {
-        console.log(response);
+        console.log(config.type, response);
         this.searchResults.update((results) => ({
           ...results,
-          [type]: results[type]
-            ? [...results[type], ...response.data]
+          [config.type]: results[config.type]
+            ? [...results[config.type], ...response.data]
             : response.data,
         }));
         this.isLoading.set(false);

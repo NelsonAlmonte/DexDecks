@@ -12,7 +12,7 @@ import { CardService } from '@card/services/card.service';
 export class CardItemComponent implements OnInit {
   router = inject(Router);
   cardService = inject(CardService);
-  card = input<Card>();
+  card = input.required<Card>();
   transformStyle: string = '';
   zIndex: string = '';
 
@@ -42,6 +42,6 @@ export class CardItemComponent implements OnInit {
   }
 
   goToCard(): void {
-    this.router.navigate(['/card', this.card()?.id]);
+    this.router.navigate(['/card', this.card().id]);
   }
 }

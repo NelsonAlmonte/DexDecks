@@ -1,17 +1,10 @@
-import {
-  Component,
-  computed,
-  ElementRef,
-  input,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, input, ViewChild } from '@angular/core';
 import { CombatDetail } from '@card/interfaces/combat-detail.interface';
 import {
   isAbility,
   isAttack,
   isRule,
 } from '@card/factories/combat-detail.factory';
-import { RowInfo } from '@shared/interfaces/array.interface';
 import { NgIcon } from '@ng-icons/core';
 import { EnergyTypeComponent } from '@shared/components/energy-type/energy-type.component';
 
@@ -23,7 +16,6 @@ import { EnergyTypeComponent } from '@shared/components/energy-type/energy-type.
 })
 export class CombatDetailItemComponent {
   detail = input<CombatDetail>();
-  rowInfo = input<RowInfo>();
   @ViewChild('combatHeading') combatHeading!: ElementRef<HTMLElement>;
   @ViewChild('combatBody') combatBody!: ElementRef<HTMLElement>;
   isAbility = isAbility;

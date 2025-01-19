@@ -1,0 +1,15 @@
+@for (item of relatedCards(); track $index) {
+<div class="flex justify-center">
+  <h1 class="text-3xl font-medium text-{{ item.textColor }}-700 my-6">
+    {{ item.text }}
+  </h1>
+</div>
+@if (cardService.searchResults()[item.type]) {
+<div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+  @for (card of cardService.searchResults()[item.type]; track $index) {
+  <app-card-item [card]="card"></app-card-item>
+  }
+</div>
+} @else {
+<app-related-cards-skeleton></app-related-cards-skeleton>
+} }

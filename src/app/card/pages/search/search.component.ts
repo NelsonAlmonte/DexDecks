@@ -5,6 +5,7 @@ import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { NoResultsComponent } from '@shared/components/search/no-results/no-results.component';
 import { Pagination } from '@shared/interfaces/pagination.interface';
+import { SearchConfig } from '@shared/interfaces/search.interface';
 import { PaginationService } from '@shared/services/pagination.service';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { pairwise, startWith } from 'rxjs';
@@ -21,6 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   paginationService = inject(PaginationService);
   params = '';
   page = 1;
+  PAGE_SIZE = 12;
 
   ngOnInit(): void {
     this.handleQueryParamsChanges();
@@ -49,7 +51,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchCards(): void {
-    this.cardService.searchCards(this.params, this.page, 'general');
+    const searchConfig: SearchConfig = {
+      type: 'general',
+      params: this.params,
+      page: this.page,
+      pageSize: this.PAGE_SIZE,
+    };
+    this.cardService.searchCards(searchConfig);
   }
 
   getMoreCards(): void {

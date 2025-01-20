@@ -21,7 +21,7 @@
         class="grid grid-cols-3 gap-4 my-4"
         [card]="cardService.card()"
       ></app-card-detail>
-      <app-combat-detail [card]="cardService.card()"></app-combat-detail>
+      <app-combat-detail [card]="cardService.card()!"></app-combat-detail>
     </div>
   </div>
   <div class="mt-4">

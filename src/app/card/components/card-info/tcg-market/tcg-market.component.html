@@ -1,0 +1,27 @@
+@for (market of markets; track $index) {
+<div class="flex justify-center">
+  <h1 class="text-2xl font-medium text-blue-700 mb-6">
+    {{ market.text }}
+  </h1>
+</div>
+<div class="flex justify-center">
+  <!-- @for (item of market.value.prices; track $index) {
+  <div class="bg-emerald-100 p-5">
+    <h1 class="text-xl">{{ item }}</h1>
+  </div>
+  } -->
+  @for (item of bar; track $index) {
+  <div class="bg-emerald-100 p-5 mx-4 rounded-2xl">
+    <h1 class="text-xl">{{ item.type }}</h1>
+    <p>Market</p>
+    <p>{{ item.values.market }}</p>
+    <p>Low</p>
+    <p>{{ item.values.low }}</p>
+    <p>Mid</p>
+    <p>{{ item.values.mid }}</p>
+    <p>High</p>
+    <p>{{ item.values.high }}</p>
+  </div>
+  }
+</div>
+}

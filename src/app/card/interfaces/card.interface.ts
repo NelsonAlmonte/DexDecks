@@ -91,6 +91,7 @@ export interface TcgPlayer {
 
 export interface TcgPrices {
   normal?: TcgPriceDetails;
+  holofoil?: TcgPriceDetails;
   reverseHolofoil?: TcgPriceDetails;
 }
 

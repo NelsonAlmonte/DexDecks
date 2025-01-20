@@ -16,13 +16,14 @@ import {
   TabsOptions,
 } from 'flowbite';
 import { RelatedCardsComponent } from '@card/components/card-info/related-cards/related-cards.component';
+import { TcgMarketComponent } from '@card/components/card-info/tcg-market/tcg-market.component';
 import { Card } from '@card/interfaces/card.interface';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapCart2, bootstrapFileImage } from '@ng-icons/bootstrap-icons';
 
 @Component({
   selector: 'app-info-tabs',
-  imports: [RelatedCardsComponent, NgIcon],
+  imports: [RelatedCardsComponent, TcgMarketComponent, NgIcon],
   templateUrl: './info-tabs.component.html',
   styleUrl: './info-tabs.component.css',
   providers: [
@@ -71,7 +72,7 @@ export class InfoTabsComponent implements AfterViewInit {
       instanceOptions
     );
 
-    tabs.show(this.triggerTabs.first.nativeElement.id);
+    tabs.show(this.triggerTabs.last.nativeElement.id);
   }
 
   getColor(): string {

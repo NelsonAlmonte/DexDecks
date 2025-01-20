@@ -24,8 +24,8 @@
       <app-combat-detail [card]="cardService.card()"></app-combat-detail>
     </div>
   </div>
-  <div>
-    <app-related-cards [card]="cardService.card()!"></app-related-cards>
+  <div class="mt-4">
+    <app-info-tabs [card]="cardService.card()!"></app-info-tabs>
   </div>
   } @else {
   <app-card-skeleton></app-card-skeleton>

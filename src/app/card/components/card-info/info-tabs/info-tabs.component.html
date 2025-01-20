@@ -1,0 +1,75 @@
+<div class="mb-4">
+  <ul
+    class="flex flex-wrap justify-center font-medium text-center"
+    id="default-tab"
+    data-tabs-toggle="#default-tab-content"
+    role="tablist"
+    #infoTabs
+  >
+    <li class="mx-4" role="presentation">
+      <button
+        class="inline-flex items-center p-5 rounded-2xl w-full"
+        id="related-cards-tab"
+        data-tabs-target="#related-cards"
+        type="button"
+        role="tab"
+        aria-controls="related-cards"
+        aria-selected="false"
+        #triggerTab
+      >
+        <ng-icon
+          class="text-{{ this.getColor() }}-700 me-2"
+          name="bootstrapFileImage"
+          size="20"
+        ></ng-icon>
+        Related cards
+      </button>
+    </li>
+    <li class="mx-4" role="presentation">
+      <button
+        class="inline-flex items-center p-5 rounded-2xl w-full"
+        id="market-tab"
+        data-tabs-target="#market"
+        type="button"
+        role="tab"
+        aria-controls="market"
+        aria-selected="false"
+        #triggerTab
+      >
+        <ng-icon
+          class="text-{{ this.getColor() }}-700 me-2"
+          name="bootstrapCart2"
+          size="20"
+        ></ng-icon>
+        Market
+      </button>
+    </li>
+  </ul>
+</div>
+<div id="default-tab-content">
+  <div
+    class="hidden rounded-lg bg-gray-50 dark:bg-gray-800"
+    id="related-cards"
+    role="tabpanel"
+    aria-labelledby="related-cards-tab"
+    #targetTab
+  >
+    <app-related-cards [card]="card()"></app-related-cards>
+  </div>
+  <div
+    class="hidden rounded-lg bg-gray-50 dark:bg-gray-800"
+    id="market"
+    role="tabpanel"
+    aria-labelledby="market-tab"
+    #targetTab
+  >
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      This is some placeholder content the
+      <strong class="font-medium text-gray-800 dark:text-white"
+        >Dashboard tab's associated content</strong
+      >. Clicking another tab will toggle the visibility of this one for the
+      next. The tab JavaScript swaps classes to control the content visibility
+      and styling.
+    </p>
+  </div>
+</div>

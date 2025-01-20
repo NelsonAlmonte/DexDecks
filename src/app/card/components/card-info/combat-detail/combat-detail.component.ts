@@ -35,10 +35,10 @@ import {
   ],
 })
 export class CombatDetailComponent implements AfterViewInit {
-  card = input<Card | null>();
+  card = input.required<Card>();
   details = computed<CombatDetail[]>(() => {
     if (!this.card()) return [];
-    return generateCombatDetails(this.card()!).filter(
+    return generateCombatDetails(this.card()).filter(
       (e) => e.value !== undefined
     );
   });

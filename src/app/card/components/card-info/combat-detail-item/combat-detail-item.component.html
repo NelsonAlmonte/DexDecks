@@ -1,20 +1,20 @@
-<h2 class="mt-4" id="combat-{{ detail()?.type }}-heading" #combatHeading>
+<h2 class="mt-4" id="combat-{{ detail().type }}-heading" #combatHeading>
   <button
     type="button"
     class="flex items-center justify-between w-full rounded-t-2xl rounded-b-2xl shadow-sm p-5 font-medium rtl:text-right text-gray-900 bg-{{
-      detail()?.color
-    }}-100 hover:bg-{{ detail()?.color }}-200 gap-3"
-    [attr.data-accordion-target]="'#combat-' + detail()?.type + '-body'"
+      detail().color
+    }}-100 hover:bg-{{ detail().color }}-200 gap-3"
+    [attr.data-accordion-target]="'#combat-' + detail().type + '-body'"
     aria-expanded="true"
-    [attr.aria-controls]="'#combat-' + detail()?.type + '-body'"
+    [attr.aria-controls]="'#combat-' + detail().type + '-body'"
   >
     <span class="flex items-center capitalize">
       <ng-icon
-        class="text-{{ detail()?.color }}-700 me-3"
-        [name]="detail()?.icon"
+        class="text-{{ detail().color }}-700 me-3"
+        [name]="detail().icon"
         size="20"
       ></ng-icon>
-      {{ detail()?.text }}</span
+      {{ detail().text }}</span
     >
     <svg
       data-accordion-icon
@@ -35,22 +35,22 @@
   </button>
 </h2>
 <div
-  id="combat-{{ detail()?.type }}-body"
+  id="combat-{{ detail().type }}-body"
   class="hidden"
   aria-labelledby="accordion-open-heading-1"
   #combatBody
 >
   <div class="p-5 border boder-gray-200 border-t-0 rounded-b-2xl shadow-sm">
-    @for (item of detail()?.value; track $index; let isLast = $last) { @if
+    @for (item of detail().value; track $index; let isLast = $last) { @if
     (isAbility(item)) {
     <div>
       <span
-        class="bg-{{ detail()?.color }}-100 text-{{
-          detail()?.color
+        class="bg-{{ detail().color }}-100 text-{{
+          detail().color
         }}-700 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full"
         >{{ item.type }}</span
       >
-      <span class="font-semibold text-{{ detail()?.color }}-700">{{
+      <span class="font-semibold text-{{ detail().color }}-700">{{
         item.name
       }}</span>
       <p class="text-gray-800 mt-2">{{ item.text }}</p>
@@ -66,7 +66,7 @@
           ></app-energy-type>
           }
         </div>
-        <span class="font-semibold text-{{ detail()?.color }}-700 ms-2">{{
+        <span class="font-semibold text-{{ detail().color }}-700 ms-2">{{
           item.name
         }}</span>
         <span class="font-semibold text-gray-700 ms-2">{{ item.damage }}</span>

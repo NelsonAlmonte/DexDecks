@@ -7,5 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './energy-type.component.css',
 })
 export class EnergyTypeComponent {
-  type = input<string>();
+  type = input.required<string>();
 }

@@ -15,7 +15,7 @@ import { EnergyTypeComponent } from '@shared/components/energy-type/energy-type.
   styleUrl: './combat-detail-item.component.css',
 })
 export class CombatDetailItemComponent {
-  detail = input<CombatDetail>();
+  detail = input.required<CombatDetail>();
   @ViewChild('combatHeading') combatHeading!: ElementRef<HTMLElement>;
   @ViewChild('combatBody') combatBody!: ElementRef<HTMLElement>;
   isAbility = isAbility;

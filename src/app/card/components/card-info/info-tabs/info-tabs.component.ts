@@ -47,17 +47,16 @@ export class InfoTabsComponent implements AfterViewInit {
     const tabsItems: TabItem[] = [];
 
     this.triggerTabs.forEach((el, index) => {
-      console.log(el.nativeElement.id);
       tabsItems.push({
         id: el.nativeElement.id,
         triggerEl: el.nativeElement,
         targetEl: this.targetTabs.get(index)!.nativeElement,
       });
     });
-    console.log('card info tab', this.card());
+
     const options: TabsOptions = {
-      activeClasses: `text-gray-900 bg-${this.getColor()}-100 hover:bg-${this.getColor()}-200`,
-      inactiveClasses: `bg-gray-50 hover:bg-${this.getColor()}-100 text-gray-700 hover:text-gray-900`,
+      activeClasses: `text-gray-900 bg-${this.getColor()}-100`,
+      inactiveClasses: `bg-gray-50 hover:bg-${this.getColor()}-200 text-gray-900 hover:text-gray-900`,
     };
 
     const instanceOptions: InstanceOptions = {

@@ -12,5 +12,5 @@ import { CardsSkeletonComponent } from '@card/skeleton-loaders/cards-skeleton/ca
 })
 export class CardListComponent {
   cardService = inject(CardService);
-  cards = input<Card[]>();
+  cards = input.required<Card[]>();
 }

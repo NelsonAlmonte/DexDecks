@@ -93,6 +93,8 @@ export interface TcgPrices {
   normal?: TcgPriceDetails;
   holofoil?: TcgPriceDetails;
   reverseHolofoil?: TcgPriceDetails;
+  '1stEditionHolofoil'?: TcgPriceDetails;
+  '1stEditionNormal'?: TcgPriceDetails;
 }
 
 export interface TcgPriceDetails {

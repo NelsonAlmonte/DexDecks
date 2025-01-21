@@ -1,5 +1,16 @@
 import { Component, input, OnInit } from '@angular/core';
-import { Card, TcgPlayer, TcgPrices } from '@card/interfaces/card.interface';
+import {
+  Card,
+  CardMarketPrices,
+  TcgPriceDetails,
+  TcgPrices,
+} from '@card/interfaces/card.interface';
+import {
+  CardMarket,
+  CardMarketPricesType,
+  Market,
+  TCGMarket,
+} from '@card/interfaces/market.interface';
 
 @Component({
   selector: 'app-tcg-market',
@@ -9,8 +20,7 @@ import { Card, TcgPlayer, TcgPrices } from '@card/interfaces/card.interface';
 })
 export class TcgMarketComponent implements OnInit {
   card = input.required<Card>();
-  markets: any[] = [];
-  bar: any[] = [];
+  markets: Market[] = [];
 
   ngOnInit(): void {
     this.foo();
@@ -20,52 +30,61 @@ export class TcgMarketComponent implements OnInit {
     const tcgMarket = this.card().tcgplayer;
     const cardMarket = this.card().cardmarket;
 
-    this.bar = [
-      {
-        type: 'normal',
-        values: {
-          low: 0.05,
-          mid: 0.2,
-          high: 1.42,
-          market: 0.14,
-        },
-      },
-      {
-        type: 'reverseHolofoil',
-        values: {
-          low: 0.19,
-          mid: 0.34,
-          high: 0.99,
-          market: 0.32,
-        },
-      },
-    ];
+    const tcgMarketPrices: TCGMarket[] = Object.keys(tcgMarket?.prices!).map(
+      (key) => {
+        return {
+          type: key,
+          prices: tcgMarket?.prices[key as keyof TcgPrices] as TcgPriceDetails,
+        };
+      }
+    );
 
-    const baz: any = [];
-    const tcgMarketKeys = Object.keys(tcgMarket?.prices!);
+    this.markets.push({
+      type: 'tcgplayer',
+      text: 'TCG Player',
+      value: tcgMarketPrices,
+    });
+    console.log(tcgMarketPrices);
 
-    for (let index = 0; index < tcgMarketKeys.length; index++) {
-      baz[index]['type'] = tcgMarketKeys[index];
-      baz[index]['values'] =
-        tcgMarket?.prices[tcgMarketKeys[index] as keyof TcgPrices];
-    }
+    const cardMarketPricesType: CardMarketPricesType = {
+      normal: ['lowPrice', 'avg1', 'avg7', 'avg30'],
+      reverseHolo: [
+        'reverseHoloLow',
+        'reverseHoloAvg1',
+        'reverseHoloAvg7',
+        'reverseHoloAvg30',
+      ],
+    };
 
-    // for (const element of tcgMarketKeys) {
-    //   baz[element] = tcgMarket?.prices![element as keyof TcgPrices];
-    // }
-    console.log(baz);
+    const cardMarketPrices: CardMarket[] = Object.keys(
+      cardMarketPricesType
+    ).map((key) => {
+      return {
+        type: key,
+        prices: Object.fromEntries(
+          cardMarketPricesType[key as keyof CardMarketPricesType].map((val) => [
+            val,
+            cardMarket?.prices[val as keyof CardMarketPrices],
+          ])
+        ),
+      };
+    });
 
-    this.markets = [
-      {
-        type: 'tcgplayer',
-        text: 'TCP Player',
-        value: tcgMarket,
-      },
-      {
-        type: 'cardmarket',
-        text: 'CardMarket',
-        value: cardMarket,
-      },
-    ];
+    this.markets.push({
+      type: 'cardmarket',
+      text: 'CardMarket',
+      value: cardMarketPrices,
+    });
+    console.log(cardMarketPrices);
+  }
+
+  isTcgPriceDetails(prices: any): prices is TcgPriceDetails {
+    return (
+      prices &&
+      typeof prices.low === 'number' &&
+      typeof prices.mid === 'number' &&
+      typeof prices.high === 'number' &&
+      typeof prices.market === 'number'
+    );
   }
 }

@@ -4,24 +4,38 @@
     {{ market.text }}
   </h1>
 </div>
-<div class="flex justify-center">
+<div class="flex flex-wrap justify-center mb-6">
   <!-- @for (item of market.value.prices; track $index) {
   <div class="bg-emerald-100 p-5">
     <h1 class="text-xl">{{ item }}</h1>
   </div>
   } -->
-  @for (item of bar; track $index) {
+  @for (item of market.value; track $index) { @if
+  (isTcgPriceDetails(item.prices)) {
+
   <div class="bg-emerald-100 p-5 mx-4 rounded-2xl">
     <h1 class="text-xl">{{ item.type }}</h1>
     <p>Market</p>
-    <p>{{ item.values.market }}</p>
+    <p>{{ item.prices.market }}</p>
     <p>Low</p>
-    <p>{{ item.values.low }}</p>
+    <p>{{ item.prices.low }}</p>
     <p>Mid</p>
-    <p>{{ item.values.mid }}</p>
+    <p>{{ item.prices.mid }}</p>
     <p>High</p>
-    <p>{{ item.values.high }}</p>
+    <p>{{ item.prices.high }}</p>
   </div>
-  }
+  } @else {
+  <div class="bg-emerald-100 p-5 mx-4 rounded-2xl">
+    <h1 class="text-xl">{{ item.type }}</h1>
+    <p>lowPrice</p>
+    <p>{{ item.prices.lowPrice }}</p>
+    <p>avg1</p>
+    <p>{{ item.prices.avg1 }}</p>
+    <p>avg7</p>
+    <p>{{ item.prices.avg7 }}</p>
+    <p>avg30</p>
+    <p>{{ item.prices.avg30 }}</p>
+  </div>
+  } }
 </div>
 }

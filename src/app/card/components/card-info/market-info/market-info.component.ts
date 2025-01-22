@@ -101,6 +101,7 @@ export class MarketInfoComponent implements OnInit {
       .replace(/reverseHolofoil/g, 'Reverse Holofoil')
       .replace(/1stEditionHolofoil/g, '1st Edition Holofoil')
       .replace(/1stEditionNormal/g, '1st Edition Normal')
+      .replace(/unlimitedHolofoil/g, 'Unlimited Holofoil')
       .replace(/reverseHolo/g, 'Reverse Holo');
   }
 

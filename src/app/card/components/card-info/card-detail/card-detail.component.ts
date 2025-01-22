@@ -11,6 +11,7 @@ import {
   bootstrapCalendar3,
   bootstrapTags,
   bootstrapJournal,
+  bootstrapJournalBookmarkFill,
 } from '@ng-icons/bootstrap-icons';
 import { CardDetailItem } from '@card/interfaces/card-detail-item.interface';
 import { generateCardDetails } from '@card/factories/card-detail.factory';
@@ -30,6 +31,7 @@ import { generateCardDetails } from '@card/factories/card-detail.factory';
       bootstrapCalendar3,
       bootstrapTags,
       bootstrapJournal,
+      bootstrapJournalBookmarkFill,
     }),
   ],
 })

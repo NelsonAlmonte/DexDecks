@@ -57,7 +57,7 @@ export class InfoTabsComponent implements AfterViewInit {
     });
 
     const options: TabsOptions = {
-      activeClasses: `text-gray-900 bg-${this.getColor()}-100`,
+      activeClasses: `text-gray-900 bg-${this.getColor()}-100 shadow-sm`,
       inactiveClasses: `bg-gray-50 hover:bg-${this.getColor()}-200 text-gray-900 hover:text-gray-900`,
     };
 

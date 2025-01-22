@@ -1,10 +1,10 @@
 import { CardDetailItem } from '@card/interfaces/card-detail-item.interface';
-import { Card } from '@card/interfaces/card.interface';
+import { Card, Legalities } from '@card/interfaces/card.interface';
 import { getColor } from '@card/utils/card.utils';
 
 export function generateCardDetails(card: Card | null): CardDetailItem[] {
   if (!card) return [];
-  return [
+  const cardDetailItems: CardDetailItem[] = [
     {
       type: 'Type',
       value: card.types?.[0] ?? undefined,
@@ -96,4 +96,21 @@ export function generateCardDetails(card: Card | null): CardDetailItem[] {
       param: `artist:"${card.artist}"`,
     },
   ];
+  getLegalities(card).forEach((cardDetailItem: CardDetailItem) => {
+    cardDetailItems.push(cardDetailItem);
+  });
+  return cardDetailItems;
+}
+
+export function getLegalities(card: Card): CardDetailItem[] {
+  return Object.keys(card.legalities).map((key) => {
+    const legalityValue = card.legalities[key as keyof Legalities];
+    return {
+      type: key,
+      value: legalityValue,
+      color: getColor(card),
+      icon: 'bootstrapJournalBookmarkFill',
+      param: `legalities.${key}:"${legalityValue}"`,
+    };
+  });
 }

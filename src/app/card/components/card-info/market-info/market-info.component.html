@@ -1,0 +1,116 @@
+@if (markets.length) { @for (market of markets; track $index) {
+<div class="flex justify-center">
+  <h1 class="text-2xl font-medium text-{{ market.color }}-700 mb-6">
+    {{ market.text }}
+  </h1>
+</div>
+<div class="flex flex-wrap justify-center mb-6">
+  @for (item of market.value; track $index) { @if
+  (isTcgPriceDetails(item.prices)) {
+  <div class="bg-{{ market.color }}-100 py-5 px-7 mx-4 rounded-2xl shadow-sm">
+    <div class="flex justify-between items-center">
+      <div>
+        <span class="text-sm text-{{ market.color }}-700 capitalize">{{
+          item.formatedType
+        }}</span>
+        <h1 class="text-3xl font-medium text-gray-900">
+          {{ item.prices.market }}
+          <span class="text-xl font-normal">{{ market.currencySign }}</span>
+        </h1>
+      </div>
+      <a [href]="market.url" target="_blank">
+        <div
+          class="p-3 bg-{{ market.color }}-200 rounded-lg h-1/4 cursor-pointer"
+        >
+          <ng-icon
+            class="text-{{ market.color }}-700"
+            name="bootstrapBoxArrowUpRight"
+            size="11"
+          ></ng-icon>
+        </div>
+      </a>
+    </div>
+    <hr
+      class="w-72 h-0.5 mx-auto my-3 bg-{{
+        market.color
+      }}-700 border-0 rounded-2xl"
+    />
+    <div class="grid grid-cols-3 gap-6">
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">Low</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.low }} {{ market.currencySign }}</span
+        >
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">Mid</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.mid }} {{ market.currencySign }}</span
+        >
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">High</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.high }} {{ market.currencySign }}</span
+        >
+      </div>
+    </div>
+  </div>
+  } @else { @if (item.prices.reverseHoloLow !== 0) {
+  <div class="bg-{{ market.color }}-100 py-5 px-7 mx-4 rounded-2xl shadow-sm">
+    <div class="flex justify-between items-center">
+      <div>
+        <span class="text-sm text-{{ market.color }}-700 capitalize">{{
+          item.formatedType
+        }}</span>
+        <h1 class="text-3xl font-medium text-gray-900">
+          {{ item.prices.lowPrice ?? item.prices.reverseHoloLow }}
+          <span class="text-xl font-normal">{{ market.currencySign }}</span>
+        </h1>
+      </div>
+      <a [href]="market.url" target="_blank">
+        <div
+          class="p-3 bg-{{ market.color }}-200 rounded-lg h-1/4 cursor-pointer"
+        >
+          <ng-icon
+            class="text-{{ market.color }}-700"
+            name="bootstrapBoxArrowUpRight"
+            size="11"
+          ></ng-icon>
+        </div>
+      </a>
+    </div>
+    <hr
+      class="w-72 h-0.5 mx-auto my-4 bg-{{
+        market.color
+      }}-700 border-0 rounded-2xl"
+    />
+    <div class="grid grid-cols-3 gap-6">
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">1 day avg</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.avg1 ?? item.prices.reverseHoloAvg1 }}
+          {{ market.currencySign }}</span
+        >
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">7 day avg</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.avg7 ?? item.prices.reverseHoloAvg7 }}
+          {{ market.currencySign }}</span
+        >
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-700">30 day avg</span>
+        <span class="text-sm font-semibold text-gray-900"
+          >{{ item.prices.avg30 ?? item.prices.reverseHoloAvg30 }}
+          {{ market.currencySign }}</span
+        >
+      </div>
+    </div>
+  </div>
+  } } }
+</div>
+} } @else {
+<app-no-results></app-no-results>
+}

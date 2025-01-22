@@ -1,6 +1,6 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card } from '@card/interfaces/card.interface';
+import { Card, CardImages } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 
 @Component({
@@ -13,6 +13,10 @@ export class CardItemComponent implements OnInit {
   router = inject(Router);
   cardService = inject(CardService);
   card = input.required<Card>();
+  imageSize = input<string>('large');
+  cardImage = computed(() => {
+    return this.card().images[this.imageSize() as keyof CardImages];
+  });
   transformStyle: string = '';
   zIndex: string = '';
 

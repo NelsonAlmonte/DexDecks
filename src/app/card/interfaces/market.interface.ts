@@ -3,16 +3,21 @@ import { CardMarketPrices, TcgPriceDetails } from './card.interface';
 export interface Market {
   type: string;
   text: string;
-  value: TCGMarket[] | CardMarket[] | undefined;
+  color: string;
+  currencySign: string;
+  url: string;
+  value: TCGMarketDetails[] | CardMarketDetails[] | undefined;
 }
 
-export interface TCGMarket {
+export interface TCGMarketDetails {
   type: string;
+  formatedType: string;
   prices: TcgPriceDetails;
 }
 
-export interface CardMarket {
+export interface CardMarketDetails {
   type: string;
+  formatedType: string;
   prices: CardMarketPrices;
 }
 

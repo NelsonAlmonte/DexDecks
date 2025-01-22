@@ -7,7 +7,7 @@
 @if (cardService.searchResults()[item.type]) {
 <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
   @for (card of cardService.searchResults()[item.type]; track $index) {
-  <app-card-item [card]="card" [imageSize]="'small'"></app-card-item>
+  <app-card-item [card]="card"></app-card-item>
   }
 </div>
 } @else {

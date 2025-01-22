@@ -9,11 +9,10 @@
   @if (cardService.card()) {
   <div class="flex justify-start">
     <div class="w-1/4">
-      <img
-        class="rounded-lg shadow-md"
-        [src]="cardService.card()?.images?.large"
-        alt="Pokemon image"
-      />
+      <app-card-item
+        [card]="cardService.card()!"
+        [allowNavigation]="false"
+      ></app-card-item>
     </div>
     <div class="flex-1 ms-10">
       <app-card-header [card]="cardService.card()!"></app-card-header>

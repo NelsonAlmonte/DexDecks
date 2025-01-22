@@ -7,6 +7,7 @@ import { CardHeaderComponent } from '@card/components/card-info/card-header/card
 import { CardSkeletonComponent } from '@card/skeleton-loaders/card-skeleton/card-skeleton.component';
 import { CombatDetailComponent } from '@card/components/card-info/combat-detail/combat-detail.component';
 import { InfoTabsComponent } from '@card/components/card-info/info-tabs/info-tabs.component';
+import { CardItemComponent } from '@card/components/card-item/card-item.component';
 
 @Component({
   selector: 'app-card',
@@ -16,6 +17,7 @@ import { InfoTabsComponent } from '@card/components/card-info/info-tabs/info-tab
     CardSkeletonComponent,
     CombatDetailComponent,
     InfoTabsComponent,
+    CardItemComponent,
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',

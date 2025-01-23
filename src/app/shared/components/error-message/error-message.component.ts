@@ -6,10 +6,10 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-no-results',
+  selector: 'app-error-message',
   imports: [NgIcon],
-  templateUrl: './no-results.component.html',
-  styleUrl: './no-results.component.css',
+  templateUrl: './error-message.component.html',
+  styleUrl: './error-message.component.css',
   providers: [
     provideIcons({
       bootstrapArrowClockwise,
@@ -17,4 +17,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
     }),
   ],
 })
-export class NoResultsComponent {}
+export class ErrorMessageComponent {
+  reloadPage(): void {
+    window.location.reload();
+  }
+}

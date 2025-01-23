@@ -13,10 +13,15 @@ import { RelatedCardsSkeletonComponent } from '@card/skeleton-loaders/related-ca
 import { generateRelatedCards } from '@card/factories/related-card.factory';
 import { Card } from '@card/interfaces/card.interface';
 import { SearchConfig } from '@shared/interfaces/search.interface';
+import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-related-cards',
-  imports: [RelatedCardsSkeletonComponent, CardItemComponent],
+  imports: [
+    RelatedCardsSkeletonComponent,
+    CardItemComponent,
+    ErrorMessageComponent,
+  ],
   templateUrl: './related-cards.component.html',
   styleUrl: './related-cards.component.css',
 })

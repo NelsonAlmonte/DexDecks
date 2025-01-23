@@ -10,6 +10,8 @@
   <app-card-item [card]="card"></app-card-item>
   }
 </div>
-} @else {
+} @if(cardService.isLoading()) {
 <app-related-cards-skeleton></app-related-cards-skeleton>
+} @if (cardService.hasError()) {
+<app-error-message></app-error-message>
 } }

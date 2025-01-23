@@ -3,10 +3,11 @@ import { CardItemComponent } from '@card/components/card-item/card-item.componen
 import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
 import { CardsSkeletonComponent } from '@card/skeleton-loaders/cards-skeleton/cards-skeleton.component';
+import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-card-list',
-  imports: [CardItemComponent, CardsSkeletonComponent],
+  imports: [CardItemComponent, CardsSkeletonComponent, ErrorMessageComponent],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.css',
 })

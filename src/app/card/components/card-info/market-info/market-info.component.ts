@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import {
   Card,
   CardMarket,
@@ -17,10 +17,12 @@ import { getColor } from '@card/utils/card.utils';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapBoxArrowUpRight } from '@ng-icons/bootstrap-icons';
 import { NoResultsComponent } from '@shared/components/search/no-results/no-results.component';
+import { CardService } from '@card/services/card.service';
+import { ErrorMessageComponent } from '@shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-market-info',
-  imports: [NoResultsComponent, NgIcon],
+  imports: [NoResultsComponent, ErrorMessageComponent, NgIcon],
   templateUrl: './market-info.component.html',
   styleUrl: './market-info.component.css',
   providers: [
@@ -30,6 +32,7 @@ import { NoResultsComponent } from '@shared/components/search/no-results/no-resu
   ],
 })
 export class MarketInfoComponent implements OnInit {
+  cardService = inject(CardService);
   card = input.required<Card>();
   markets: Market[] = [];
 

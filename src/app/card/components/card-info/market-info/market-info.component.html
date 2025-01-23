@@ -117,4 +117,6 @@
 </div>
 } } @else {
 <app-no-results></app-no-results>
+} @if (cardService.hasError()) {
+<app-error-message></app-error-message>
 }

@@ -23,11 +23,15 @@
           <button
             (click)="viewImage($event)"
             type="button"
-            class="text-white bg-{{ getColor() }}-700 hover:text-{{
+            class="text-white bg-{{ getColor() }}-700 hover:bg-{{
               getColor()
-            }}-200 focus:outline-none font-medium rounded-xl text-sm p-2.5 text-center inline-flex items-center"
+            }}-800 focus:outline-none font-medium rounded-xl text-sm p-2.5 text-center inline-flex items-center"
           >
-            <ng-icon name="bootstrapZoomIn" size="16"></ng-icon>
+            <ng-icon
+              class="text-white"
+              name="bootstrapZoomIn"
+              size="16"
+            ></ng-icon>
             <span class="sr-only">Icon description</span>
           </button>
         </div>

@@ -15,7 +15,7 @@ export class CardHeaderComponent {
     const color = this.card().types
       ? this.card().types[0].toLowerCase()
       : 'colorless';
-    return `hover:text-${color}-700 hover:underline hover:decoration-${color}-700 cursor-pointer`;
+    return `hover:text-${color}-700 hover:underline cursor-pointer`;
   });
 
   goToSearch(param: string, value: string): void {

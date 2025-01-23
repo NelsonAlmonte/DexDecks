@@ -17,7 +17,7 @@ export class CardDetailItemComponent {
     const detail = this.detail();
     if (detail.param) {
       const color = detail.color;
-      return `hover:text-${color}-700 hover:underline hover:decoration-${color}-700 cursor-pointer`;
+      return `hover:text-${color}-700 hover:underline cursor-pointer`;
     }
     return '';
   });

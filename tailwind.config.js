@@ -133,8 +133,8 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /(bg|text|border|ring|decoration|from)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700)/,
-      variants: ["peer-focus", "peer-checked", "hover"],
+        /(bg|text|from)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700|800)/,
+      variants: ["peer-checked", "hover"],
     },
   ],
 };

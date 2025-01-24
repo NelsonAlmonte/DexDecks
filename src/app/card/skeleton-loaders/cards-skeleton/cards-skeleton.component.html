@@ -1,7 +1,9 @@
-<div class="grid grid-cols-4 gap-6 animate-pulse mb-6">
+<div
+  class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-pulse p-4"
+>
   @for (item of iterations; track $index) {
   <div
-    class="flex items-center justify-center w-full h-96 bg-gray-300 rounded-lg"
+    class="flex items-center justify-center w-full h-64 md:h-72 lg:h-96 bg-gray-300 rounded-lg"
   >
     <svg
       class="w-10 h-10 text-gray-200 dark:text-gray-600"

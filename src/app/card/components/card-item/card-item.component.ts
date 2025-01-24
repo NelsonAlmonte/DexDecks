@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from '@card/interfaces/card.interface';
 import { CardService } from '@card/services/card.service';
@@ -23,40 +23,13 @@ import {
     }),
   ],
 })
-export class CardItemComponent implements OnInit {
+export class CardItemComponent {
   router = inject(Router);
   cardService = inject(CardService);
   lightbox = inject(Lightbox);
   lightboxConfig = inject(LightboxConfig);
   card = input.required<Card>();
   allowNavigation = input<Boolean>(true);
-  transformStyle: string = '';
-  zIndex: string = '';
-
-  ngOnInit(): void {}
-
-  // TODO: Mover esto a una directiva?
-  onMouseMove(event: MouseEvent): void {
-    const card = event.currentTarget as HTMLElement;
-    const rect = card.getBoundingClientRect();
-
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 15;
-
-    this.transformStyle = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
-    this.zIndex = 'z-40';
-  }
-
-  onMouseLeave(): void {
-    this.transformStyle = 'rotateX(0deg) rotateY(0deg)';
-    this.zIndex = 'z-0';
-  }
 
   goToCard(): void {
     if (!this.allowNavigation()) return;

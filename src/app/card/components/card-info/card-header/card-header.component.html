@@ -1,11 +1,11 @@
 <h1
-  class="text-4xl text-gray-900 mb-2"
+  class="text-4xl text-center lg:text-start text-gray-900 mb-2"
   [class]="class()"
   (click)="goToSearch('name:', card().name)"
 >
   {{ card().name }}
 </h1>
-<div class="flex text-gray-600">
+<div class="flex flex-wrap justify-center lg:justify-normal text-gray-600">
   <span
     [class]="class()"
     (click)="goToSearch('supertype:', card().supertype)"

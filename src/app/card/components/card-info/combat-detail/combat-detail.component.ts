@@ -66,8 +66,8 @@ export class CombatDetailComponent implements AfterViewInit {
 
     const options: AccordionOptions = {
       alwaysOpen: true,
-      activeClasses: 'text-gray-900 dark:text-white',
-      inactiveClasses: 'text-gray-500 dark:text-gray-400',
+      activeClasses: 'text-gray-900',
+      inactiveClasses: 'text-gray-500',
       onOpen(accordion, item) {
         item.triggerEl.children[0].classList.remove('rounded-b-2xl');
         item.triggerEl.children[0].classList.remove('shadow-sm');

@@ -42,7 +42,6 @@ export class CardItemComponent {
 
   viewImage(event: Event): void {
     event.stopPropagation();
-    this.lightboxConfig.fadeDuration = 0.1;
     this.lightboxConfig.resizeDuration = 0;
     const album: IAlbum[] = [
       {

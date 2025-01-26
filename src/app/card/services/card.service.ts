@@ -30,7 +30,6 @@ export class CardService {
 
     this.catchErrors(observable).subscribe((response) => {
       if (response) {
-        console.log(response);
         this.cards.update((values) => {
           return [...values, ...response.data];
         });
@@ -52,7 +51,6 @@ export class CardService {
 
     this.catchErrors(observable).subscribe((response) => {
       if (response) {
-        console.log(response);
         this.card.set(response.data);
         this.isLoading.set(false);
       } else {
@@ -79,7 +77,6 @@ export class CardService {
 
     this.catchErrors(observable).subscribe((response) => {
       if (response) {
-        console.log(config.type, response);
         this.searchResults.update((results) => ({
           ...results,
           [config.type]: results[config.type]
@@ -104,7 +101,6 @@ export class CardService {
 
     this.catchErrors(observable).subscribe((response) => {
       if (response) {
-        console.log(response);
         this.filter.set(response.data);
         this.isLoading.set(false);
       } else {
@@ -116,7 +112,6 @@ export class CardService {
   catchErrors<T>(observable: Observable<T>): Observable<T | null> {
     return observable.pipe(
       catchError((error) => {
-        console.log('error in catcherror', error);
         this.isLoading.set(false);
         this.hasError.set(true);
         return of(null);

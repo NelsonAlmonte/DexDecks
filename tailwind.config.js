@@ -129,11 +129,10 @@ module.exports = {
     },
   },
   plugins: [require("flowbite/plugin")],
-  darkMode: "class",
   safelist: [
     {
       pattern:
-        /(bg|text|from)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700|800)/,
+        /(bg|text)-(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|colorless|dragon)-(100|200|700|800)/,
       variants: ["peer-checked", "hover"],
     },
   ],

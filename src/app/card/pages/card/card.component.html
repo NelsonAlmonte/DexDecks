@@ -34,7 +34,7 @@
   </div>
   } @else if (cardService.hasError()) {
   <app-error-message></app-error-message>
-  } @if(cardService.isLoading()) {
+  } @if(cardService.isLoading() && !cardService.card()) {
   <app-card-skeleton></app-card-skeleton>
   }
 </div>

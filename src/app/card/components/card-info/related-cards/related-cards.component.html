@@ -12,7 +12,8 @@
   <app-card-item [card]="card"></app-card-item>
   }
 </div>
-} @if(cardService.isLoading()) {
+} @if(cardService.isLoading() && !cardService.searchResults()[item.type].length)
+{
 <app-related-cards-skeleton></app-related-cards-skeleton>
 } @if (cardService.hasError()) {
 <app-error-message></app-error-message>

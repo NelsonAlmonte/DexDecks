@@ -42,7 +42,11 @@ export class CardItemComponent {
 
   viewImage(event: Event): void {
     event.stopPropagation();
+    this.lightboxConfig.fadeDuration = 0.1;
     this.lightboxConfig.resizeDuration = 0;
+    this.lightboxConfig.disableScrolling = true;
+    this.lightboxConfig.centerVertically = true;
+    this.lightboxConfig.enableTransition = false;
     const album: IAlbum[] = [
       {
         src: this.card().images.large,
